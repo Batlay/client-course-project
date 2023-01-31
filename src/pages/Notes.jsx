@@ -39,7 +39,7 @@ const Notes = () => {
                 setNotes([...notes, response.data])
                 setModal(false)
              });
-      }
+        }
 
 
         return (

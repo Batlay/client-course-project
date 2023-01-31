@@ -13,6 +13,7 @@ import Test4 from "../components/Tests/Test4";
 import Test3 from "../components/Tests/Test3";
 import Test2 from "../components/Tests/Test2";
 import Test1 from "../components/Tests/Test1";
+import Report from "../components/Report/Report";
 
 export const privateRoutes = [
     {path: '/about', component: <About />, exact: true},
@@ -28,6 +29,7 @@ export const privateRoutes = [
     {path: '/tests/test3', component: <Test3 />, exact: true},
     {path: '/tests/test2', component: <Test2 />, exact: true},
     {path: '/tests/test1', component: <Test1 />, exact: true},
+    {path: '/pupils/report/:id', component: <Report />, exact: true},
     // {path: '/login', component: <Login />, exact: true},
 ]
 

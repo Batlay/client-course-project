@@ -32,7 +32,12 @@ const Pupils = () => {
              .then(response =>  {
                 setPupils([...pupils, response.data])
                 setModal(false)
-             });
+             })
+             .catch((error) => {
+                if (error.response) {
+                    console.log(error.response.data);
+                  }
+             })
       }
 
 

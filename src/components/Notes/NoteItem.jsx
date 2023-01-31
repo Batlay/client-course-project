@@ -35,14 +35,13 @@ const NoteItem = ({note}) => {
     // </Card>
     <div>
       <div className="card">
-    <div className="card__header">
-      <img src={randomImages[Math.floor(Math.random()*randomImages.length)]} alt="card__image" className="card__image" width="600" />
-    </div>
-    <div className="card__body">
-    <span>{note.pupil}</span>
-      
-      <h4>{note.title}</h4>
-      <p>{note.content.substring(0, 280)}...</p>
+        <div className="card__header">
+          <img src="https://i.stack.imgur.com/QqRWG.jpg" alt="card__image" className="card__image" width="600" />
+        </div>
+        <div className="card__body">
+          <span>{note.pupil}</span>
+        <h4>{note.title}</h4>
+        <p>{note.content.substring(0, 280)}...</p>
       {/* { note.result == 'Плохой результат' &&
       <span className="tag tag-red">Плохой результат </span>
       }
@@ -52,19 +51,18 @@ const NoteItem = ({note}) => {
       { note.result == 'Стоит обратить внимание' &&
       <span className="tag tag-brown">Стоит обратить внимание </span>
       } */}
-    </div>
-    <div className="card__footer">
-      <div className="user">
-        <div className="user__info">
-          <h5>{note.author}</h5>
-          <small>{note.created_on}</small>
+      </div>
+      <div className="card__footer">
+        <div className="user">
+          <div className="user__info">
+            <h5>{note.author}</h5>
+            <small>{note.created_on}</small>
+          </div>
+          <Link to={`/notes/${note.slug}`}>Подробнее</Link>
         </div>
-        <Link to={`/notes/${note.slug}`}>Подробнее</Link>
       </div>
     </div>
-  </div>
   <br></br>
-
   </div>
     )
 }

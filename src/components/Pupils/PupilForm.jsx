@@ -14,13 +14,20 @@ const PupilForm = ({create}) => {
 
     const addNewPupil = (e) => {
         e.preventDefault()
-        const newPupil = {
-            ...pupil
+        if (!isValidPhone(pupil.phone)) {
+            console.log('Введите корректный телефон')
+        } 
+        else if (!isValidEmail(pupil.email)) {
+            console.log('Введите корректный email')
+        } 
+        else {
+            const newPupil = {
+                ...pupil
+            }
+  
+            create(newPupil)
+            setPupil({fio: '', phone: '', email: '', profile_pic: ''})
         }
-        console.log(newPupil.profile_pic)
-        
-        create(newPupil)
-        setPupil({fio: '', phone: '', email: '', profile_pic: ''})
     }
 
 
@@ -45,7 +52,15 @@ const PupilForm = ({create}) => {
         console.log(typeof a)
     }
 
- 
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    function isValidPhone(phone) {
+        return  /^[+]375 [(][0-9]{2}[)] [0-9]{3}[-][0-9]{2}[-][0-9]{2}$/.test(phone);
+        // return  /^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$/.test(phone);
+    }
+
 
     return (
         <form>
@@ -72,7 +87,7 @@ const PupilForm = ({create}) => {
             placeholder='Фото' 
 
             />
-        <MyButton onClick={addNewPupil}>Создать пост</MyButton>
+        <MyButton onClick={addNewPupil}>Добавить ученика</MyButton>
     </form>
     )
 }
