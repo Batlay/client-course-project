@@ -1,7 +1,7 @@
 import React from 'react'
 import PupilItem from './PupilItem'
 
-const PupilList = ({pupils}) => {
+const PupilList = ({pupils, spec}) => {
 
     if (!pupils.length) {
       return (
@@ -24,7 +24,7 @@ const PupilList = ({pupils}) => {
                     </tr>
                 </thead>
           {pupils.map((pupil, index) => (
-                <PupilItem pupil={pupil} />
+                <PupilItem pupil={pupil} spec={spec} />
             ))}
                 </table>
       </div>

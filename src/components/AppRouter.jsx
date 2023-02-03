@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../Router/routes';
-import { AuthContext, Context } from '../context';
+import { AuthContext} from '../context';
 import Loader from './UI/Loader/Loader';
 import NavbarPanel from './UI/Navbar/NavbarPanel';
-import Login from '../pages/Login';
 import { UserContext } from '../context/userContext';
 
 
@@ -14,8 +13,13 @@ const AppRouter = () => {
 
 //   const User = localStorage.geItem('user')
 
-  console.log('Состояние авторизации:' , isAuth)
+  // console.log('Состояние авторизации:' , isAuth)
+  // console.log('Данные пользователя:' , value)
+  let group = 0
 
+  if (isAuth) {
+      group = JSON.parse(localStorage.getItem('user')).groups
+  }
 
   if (isLoading) {
       return <Loader />
@@ -23,8 +27,15 @@ const AppRouter = () => {
   if (!isAuth) {
     return (
       <Routes>
-         <Route  path = "/login" element={<Login />} key ='/login' />
-        {<Route path="*" element={<Navigate to ="/login" />}/> }
+         {publicRoutes.map(route => 
+            <Route exact
+            element={route.component } 
+            path={route.path}
+            key={route.path}
+            />
+        )}
+         {/* <Route  path = "/login" element={<Login />} key ='/login' /> */}
+        {/* {<Route path="*" element={<Navigate to ="/login" />}/> } */}
     </Routes> )
   } else {
 
@@ -33,7 +44,7 @@ const AppRouter = () => {
     <div className="navbar">
     <NavbarPanel />
     </div>
-    { value.groups == 1 &&
+    { group == 1 &&
     <Routes>  
         {privateRoutes.map(route => 
             <Route exact
@@ -45,7 +56,19 @@ const AppRouter = () => {
         {<Route path="/login" element={<Navigate to ="/tests" />}/> }
     </Routes>
   } 
-  { value.groups == 3 &&
+  { group == 2 &&
+    <Routes>  
+        {privateRoutes.map(route => 
+            <Route exact
+            element={route.component } 
+            path={route.path}
+            key={route.path}
+            />
+        )}
+        {<Route path="/login" element={<Navigate to ="/administator/schools" />}/> }
+    </Routes>
+  }
+  { group == 3 &&
     <Routes>
         {privateRoutes.map(route => 
             <Route exact
@@ -55,6 +78,18 @@ const AppRouter = () => {
             />
         )}
          {<Route path="/login" element={<Navigate to ="/about" />}/> }
+    </Routes>
+  }
+   { group == 4 &&
+    <Routes>
+        {privateRoutes.map(route => 
+            <Route exact
+            element={route.component } 
+            path={route.path}
+            key={route.path}
+            />
+        )}
+         {<Route path="/login" element={<Navigate to ="/schools" />}/> }
     </Routes>
   }
     </>

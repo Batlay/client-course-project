@@ -11,24 +11,26 @@ import axios from 'axios'
 import PupilNotes from '../components/Pupils/PupilNotes';
 
 
+
 const Notes = () => {
         const [notes, setNotes] = useState([])
         const [pupils, setPupils] = useState([])
         const [modal, setModal] = useState(false)
-        
+        const userData = JSON.parse(localStorage.getItem('user'))
+
         useEffect(() => {
             getNotes()
             getPupils()
         }, [])
         
         const getNotes = async () => {
-            const response = await axios.get('/api/notes/')
+            const response = await axios.post('/api/notes/', userData )
             setNotes(response.data)
             console.log(response.data)
         }
 
         const getPupils = async () => {
-            const response = await axios.get('/api/pupils/')
+            const response = await axios.post('/api/pupils/', userData )
             setPupils(response.data)
             console.log(response.data)
         }

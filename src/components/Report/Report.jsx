@@ -1,19 +1,12 @@
 import { useState, useEffect} from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
-import ReactDOM from 'react-dom';
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
-import MyDocument from './MyDocument';
-import Pdf from './inv.pdf'
 import MyButton from '../UI/Button/MyButton';
-import PDFFile from './PDFFile'
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
 
 
 const Report = () => {
-//     <PDFViewer>
-//     <MyDocument/>
-//   </PDFViewer>
+	
 	const params = useParams()
 	const [numPages, setNumPages] = useState(null);
 	const [pageNumber, setPageNumber] = useState(1);
@@ -43,22 +36,35 @@ const Report = () => {
 		.then((response) => {
 			setPdf(response.data)
 		})    
+		.catch(error => {
+			if (error.response) {
+			  console.log(error.response.data);
+			}
+		  });
+		console.log(pdf)
+	}
+
+	const downloadPdf = async() => {
+		const response = await axios.get(`/api/pupils/report/download/${params.id}`, {responseType: 'arraybuffer'})
+		.then((response) => {
+			setPdf(response.data)
+		})    
+		.catch(error => {
+			if (error.response) {
+			  console.log(error.response.data);
+			}
+		  });
 		console.log(pdf)
 	}
 
 	const onButtonClick = () => {
-        // using Java Script method to get PDF file
-        fetch({pdf}).then(response => {
-            response.blob().then(blob => {
-                // Creating new object of PDF file
-                const fileURL = window.URL.createObjectURL(blob);
-                // Setting various property values
-                let alink = document.createElement('a');
-                alink.href = fileURL;
-                alink.download = 'SamplePDF.pdf';
-                alink.click();
-            })
-        })
+		downloadPdf()
+		const url = window.URL.createObjectURL(new Blob([new Uint8Array(pdf).buffer])); 
+		const link = document.createElement('a'); 
+		link.href = url; 
+		link.setAttribute('download', 'yourcoolpdf.pdf'); 
+		document.body.appendChild(link); 
+		link.click();
     }
 
 	return (

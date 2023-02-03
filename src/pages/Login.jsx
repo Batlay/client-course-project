@@ -4,6 +4,7 @@ import MyInput from '../components/UI/Input/MyInput'
 import { AuthContext } from '../context'
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
+import { Link } from 'react-router-dom'
 
 // export const UserContext = React.createContext();
 
@@ -52,6 +53,7 @@ const Login = () => {
             />
             <MyButton>Войти</MyButton>
         </form>
+        <p className='mt-3'><Link to='/user-forgot-password'>Забыли Пароль?</Link></p>
     </div>
   )
 }

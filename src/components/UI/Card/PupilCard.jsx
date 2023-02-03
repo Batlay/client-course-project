@@ -11,7 +11,7 @@ const PupilCard = (props) => {
             <div style={{ width: 200}}>
                 <Card.Img variant='top' className='w-200' style={{height: 150, width: 150}} src={imgSrc} />
             </div>
-            <Card.Body classname='text-center'>
+            <Card.Body className='text-center'>
                 <Card.Title style={{fontSize: 16, height: 50}}>{title}</Card.Title>
             </Card.Body>
             {/* <Button className='w-100 rounded-0' variant='success'>Посмотреть</Button> */}

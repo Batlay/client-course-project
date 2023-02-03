@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
 const Test1 = () => {
 
     // const arr = [
@@ -18,7 +19,7 @@ const Test1 = () => {
     //     },
     // ];
     // const [array, setArray] = useState(arr)
-
+    const {value, setValue} = useContext(UserContext)
     const [value1, setValue1] = useState(0)
     const [value2, setValue2] = useState(0)
     const [value3, setValue3] = useState(0)
@@ -33,6 +34,7 @@ const Test1 = () => {
     const [value55, setValue55] = useState(0)
     const [value66, setValue66] = useState(0)
     const [value77, setValue77] = useState(0)
+    const userData = JSON.parse(localStorage.getItem('user'))
 
     let answers = [
         value2, value3, value4, value5, value6, value7,
@@ -45,9 +47,18 @@ const Test1 = () => {
             e.preventDefault();
   
             console.log(answers)
-            axios.post('/api/tests/test1/answers/', answers)
-             .then(router(`/tests/`, {replace: true}));
+            axios.post(`/api/tests/test1/answers/${userData.id}`, answers)
+             .then((response) => {
+                router(`/tests/`, {replace: true})
+                console.log(response.data)}
+             )
+             .catch(error => {
+                if (error.response) {
+                  console.log(error.response.data);
+                }
+              });
         };
+        
 
   return (
     <>

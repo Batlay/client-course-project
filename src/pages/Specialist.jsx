@@ -6,10 +6,10 @@ import Loader from '../components/UI/Loader/Loader'
 import MyButton from '../components/UI/Button/MyButton'
 import { Link } from 'react-router-dom'
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import NoteForm from '../components/Notes/NoteForm'
 
 
-
-const PupilPage = () => {
+const Specialist = () => {
     const params = useParams()
     const [pupil, setPupil] = useState({})
     const [overall, setOverall] = useState({})
@@ -21,12 +21,10 @@ const PupilPage = () => {
         setPupil(response.data)
     })
 
-
     const [getOverall, isLoading2, error2] = useFetching(async (id) => {
         const response = await axios.get(`/api/pupils/overall/${id}`)
         setOverall(response.data)
     })
-
 
     const getResult = async (id) => {
         const response = await axios.get(`/api/pupils/result/${id}`)
@@ -35,14 +33,24 @@ const PupilPage = () => {
         })      
     }
 
-  
-
     useEffect(() => {
         getPupil(params.id)
         getOverall(params.id)
         getResult(params.id)
     }, [])
 
+    
+    const addNote = (newNote) => {
+        axios.post(`/api/notes/create/${params.id}`, newNote)
+         .then(response =>  {
+            console.log('Успешное сохранение')
+         })
+         .catch((error) => {
+            if (error.response) {
+                console.log(error.response.data);
+              }
+         })
+        }
 
   return (
     <div>
@@ -56,11 +64,14 @@ const PupilPage = () => {
                 {pupil.fio}
             </h1>
             {
-            pupil.profile_pic &&
-            <img src={`http://localhost:8000/static${pupil.profile_pic}`} alt=''/>}
-        </div> 
+            pupil.profile_pic && <img src={`http://localhost:8000/static${pupil.profile_pic}`} alt=''/>}
+        </div>
+        <div className="item item_3">
+        <Link to={`/pupils`}>Вернуться назад</Link>
+            <img src={`data:image/jpeg;base64,${overall}`} alt=''/>
+        </div>
 
-        <div className="item item_2"> 
+        <div className="item item_2_1"> 
              <br />
             <p>Критерии:</p>
             <p>Когнитивно-эмоциональный: 
@@ -70,39 +81,21 @@ const PupilPage = () => {
             <p>Мотивационно-ценностный: направленность на себя - {result[4]}, взаимодействие - {result[5]}, задачу - {result[6]}</p>
             <p>Деятельностно-процессуальный: {result[7]} </p>
             <p>Рефлексивный: Уровень самооценки - {result[8]} Уровень притязаний - {result[9]}, Разница - {result[10]}</p>
-            {/* <button className="btn btn-link-dark"> */}
-    
-             {/* </button> */}
-             <Link to={`/pupils/report/${params.id}`}>Сформировать отчет</Link>
-             {/* <MyButton onClick={getPdf}>Cформировать отчет</MyButton>
-             { pdf && <redirect to={{
-            pathname: '/report',
-            state: { file: pdf }
-        }}
-/>} */}
+
+            <NoteForm create={addNote}/>
         </div>
 
-        <div className="item item_3">
-        <Link to={`/pupils`}>Вернуться назад</Link>
-            { !isLoading2 && <img src={`data:image/jpeg;base64,${overall}`} alt=''/> }
+        <div className="item item_3_1">
+        {/* <Link to={`/pupils`}>Вернуться назад</Link> */}
+        { !isLoading2 &&  <img src='https://psytests.org/img/profile-eye-sd.png' style={{ height: '50%'}} alt=''/>}
+            {/* <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqjdUUzRhppKrASvCqg3b6tNPpgFF-TXDqlF_5tawYny9wllMu3V8aS-tdPuxsSlLAP6E&usqp=CAU' style={{ height: '50%'}} alt=''/> */}
         </div>
 
-        <div className="item item_4"></div>
-        <div className="item item_5">
-            <h6>
-                Связь с учеником:
-            </h6>
-            <p>
-                Email: {pupil.email}
-            </p>
-            <p>
-                Телефон: {pupil.phone}
-            </p>
-        </div>
+       
      </div>
         }
     </div>
   )
 }
 
-export default PupilPage
+export default Specialist

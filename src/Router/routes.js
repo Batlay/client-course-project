@@ -2,7 +2,6 @@ import About from "../pages/About";
 import PostIdPage from "../pages/PostIdPage";
 import Posts from "../pages/Posts";
 import Login from "../pages/Login";
-import NotesListPage from "../components/Notes/NotesList.jsx";
 import NotePage from "../pages/NotePage";
 import Notes from '../pages/Notes'
 import Pupils from "../pages/Pupils";
@@ -14,6 +13,15 @@ import Test3 from "../components/Tests/Test3";
 import Test2 from "../components/Tests/Test2";
 import Test1 from "../components/Tests/Test1";
 import Report from "../components/Report/Report";
+import ResetPassword from "../pages/ResetPassword";
+import ChangePassword from "../pages/ChangePassword";
+import Schools from "../pages/Schools";
+import Classrooms from "../pages/Classrooms";
+import ClassroomPupils from "../components/Pupils/ClassroomPupils";
+import Specialist from "../pages/Specialist";
+import EditSchools from "../pages/Admin/EditSchools";
+import EditPupils from "../pages/Admin/EditPupils";
+import EditClassrooms from "../pages/Admin/EditClassrooms";
 
 export const privateRoutes = [
     {path: '/about', component: <About />, exact: true},
@@ -30,9 +38,18 @@ export const privateRoutes = [
     {path: '/tests/test2', component: <Test2 />, exact: true},
     {path: '/tests/test1', component: <Test1 />, exact: true},
     {path: '/pupils/report/:id', component: <Report />, exact: true},
+    {path: '/schools', component: <Schools />, exact: true},
+    {path: '/schools/:id', component: <Classrooms />, exact: true},
+    {path: '/classrooms/:id', component: <ClassroomPupils />, exact: true},
+    {path: '/specialist/:id', component: <Specialist />, exact: true},
+    {path: '/administator/schools', component: <EditSchools />, exact: true},
+    {path: '/administrator/schools/:id', component: <EditClassrooms />, exact: true},
+    {path: '/administrator/classrooms/:id', component: <EditPupils />, exact: true},
     // {path: '/login', component: <Login />, exact: true},
 ]
 
 export const publicRoutes = [
     {path: '/login', component: <Login />, exact: true},
+    {path: '/user-forgot-password', component: <ResetPassword />, exact: true},
+    {path: '/user-change-password/:id', component: <ChangePassword />, exact: true},
 ]
