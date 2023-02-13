@@ -32,7 +32,7 @@ const Report = () => {
 	}, [])
 
 	const getPdf = async() => {
-		const response = await axios.get(`/api/pupils/report/${params.id}`, {responseType: 'arraybuffer'})
+		await axios.get(`/api/pupils/report/${params.id}`, {responseType: 'arraybuffer'})
 		.then((response) => {
 			setPdf(response.data)
 		})    
@@ -45,7 +45,7 @@ const Report = () => {
 	}
 
 	const downloadPdf = async() => {
-		const response = await axios.get(`/api/pupils/report/download/${params.id}`, {responseType: 'arraybuffer'})
+		await axios.get(`/api/pupils/report/download/${params.id}`, {responseType: 'arraybuffer'})
 		.then((response) => {
 			setPdf(response.data)
 		})    
@@ -70,12 +70,12 @@ const Report = () => {
 	return (
 		<div style={{margin: 'auto', width: '50%'}}>
 			<nav>
-				<MyButton onClick={goToPrevPage}>Назад</MyButton>
-				<MyButton onClick={goToNextPage}>Далее</MyButton>
+				<MyButton data-testid='prev' onClick={goToPrevPage}>Назад</MyButton>
+				<MyButton data-testid='next' onClick={goToNextPage}>Далее</MyButton>
 				<p>
 					Page {pageNumber} of {numPages}
 				</p>
-				<button onClick={onButtonClick}>
+				<button onClick={onButtonClick} data-testid='pdf_button'>
                     Скачать PDF файл
                 </button>
 			</nav>

@@ -1,6 +1,4 @@
 import About from "../pages/About";
-import PostIdPage from "../pages/PostIdPage";
-import Posts from "../pages/Posts";
 import Login from "../pages/Login";
 import NotePage from "../pages/NotePage";
 import Notes from '../pages/Notes'
@@ -25,8 +23,6 @@ import EditClassrooms from "../pages/Admin/EditClassrooms";
 
 export const privateRoutes = [
     {path: '/about', component: <About />, exact: true},
-    {path: '/posts', component: <Posts />, exact: true},
-    {path: '/posts/:id', component: <PostIdPage/>, exact: true},
     {path: '/notes', component: <Notes />, exact: true},
     {path: '/notes/:id', component: <NotePage/>, exact: true},
     {path: '/notes/person/:id', component: <PersonNotes/>, exact: true},

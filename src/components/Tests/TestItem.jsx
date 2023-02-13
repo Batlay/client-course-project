@@ -7,7 +7,7 @@ const TestItem = ({test}) => {
     return (
         <>
         <tbody>
-            <tr>
+            <tr data-testid='test'>
                 <td>{test.name}</td>
                 <td>{test.time} минут</td>
                 <td>  

@@ -7,18 +7,18 @@ const PupilItem = ({pupil, spec = false}) => {
     return (
         <>
         <tbody>
-            <tr>
+            <tr data-testid='pupil'>
                 <td>{pupil.fio}</td>
                 <td>{pupil.email}</td>
                 { spec 
                 ? 
                     <td>  
-                        <MyButton onClick={() => router(`/specialist/${pupil.id}`, {replace: true})}>
+                        <MyButton data-testid='see_btn' onClick={() => router(`/specialist/${pupil.id}`, {replace: true})}>
                             Посмотреть
                         </MyButton>
                     </td>
                 :   <td>  
-                        <MyButton onClick={() => router(`/pupils/${pupil.id}`, {replace: true})}>
+                        <MyButton data-testid='see_btn' onClick={() => router(`/pupils/${pupil.id}`, {replace: true})}>
                             Посмотреть
                         </MyButton>
                     </td>  

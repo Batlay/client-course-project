@@ -3,7 +3,7 @@ import MyInput from '../UI/Input/MyInput'
 import { useState, useEffect } from 'react'
 import MyButton from '../UI/Button/MyButton'
 
-const PupilForm = ({create}) => {
+const PupilForm = ({create, visible}) => {
     const [pupil, setPupil] = useState(
         {
             fio: '', 
@@ -63,7 +63,7 @@ const PupilForm = ({create}) => {
 
 
     return (
-        <form>
+        <form data-testid='2' >
         <MyInput 
             value={pupil.fio}
             onChange={e => setPupil({...pupil, fio: e.target.value})}
@@ -87,7 +87,7 @@ const PupilForm = ({create}) => {
             placeholder='Фото' 
 
             />
-        <MyButton onClick={addNewPupil}>Добавить ученика</MyButton>
+        <MyButton  data-testid='add_button' onClick={addNewPupil}>Добавить ученика</MyButton>
     </form>
     )
 }

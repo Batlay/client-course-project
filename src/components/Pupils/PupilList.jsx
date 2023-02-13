@@ -24,7 +24,7 @@ const PupilList = ({pupils, spec}) => {
                     </tr>
                 </thead>
           {pupils.map((pupil, index) => (
-                <PupilItem pupil={pupil} spec={spec} />
+                <PupilItem  pupil={pupil} spec={spec} />
             ))}
                 </table>
       </div>

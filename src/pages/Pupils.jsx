@@ -23,6 +23,7 @@ const Pupils = () => {
         const getPupils = async () => {
             const response = await axios.post('/api/pupils/', userData)
             setPupils(response.data)
+            console.log(response.data)
         } 
 
         const addPupil = (newPupil) => {
@@ -43,13 +44,13 @@ const Pupils = () => {
         <Container>
         <Row>
         <MyModal visible={modal} setVisible={setModal}>
-        <PupilForm create={addPupil} />
+            <PupilForm create={addPupil} />
         </MyModal>
             <Col md={7} mt={3}>
-            <MyButton style={{marginTop: '30px', width: '100%' }} onClick={() => setModal(true)}>
-            Добавить студента
+            <MyButton data-testid='1' name='add' style={{marginTop: '30px', width: '100%' }} onClick={() => setModal(true)}>
+            Добавить нового ученика
         </MyButton>
-                <PupilList pupils={pupils} /></Col>
+                <PupilList  pupils={pupils} /></Col>
             <Col>{pupils.classroom}</Col>
         </Row>
     </Container>

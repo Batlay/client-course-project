@@ -21,6 +21,7 @@ const Tests = () => {
         const getTests = async () => {
             const response = await axios.post('/api/tests/', userData )
             setTests(response.data)
+            console.log(response.data)
         }
 
 

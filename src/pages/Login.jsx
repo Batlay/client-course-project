@@ -4,15 +4,17 @@ import MyInput from '../components/UI/Input/MyInput'
 import { AuthContext } from '../context'
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // export const UserContext = React.createContext();
+
 
 const Login = () => {
   const [user, setUser] = useState({username: '', password: ''})
   const {isAuth, setIsAuth} = useContext(AuthContext)
   const {value, setValue} = useContext(UserContext)
-  
+  const router = useNavigate()
+
   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
   axios.defaults.xsrfCookieName = 'csrftoken';
 
@@ -39,7 +41,7 @@ const Login = () => {
 
   return (
     <div>
-        <form onSubmit={login}>
+        <form onSubmit={login} aria-label="form">
             <MyInput 
               value={user.username}
             type='text' placeholder='Введите  логин'
@@ -51,9 +53,12 @@ const Login = () => {
               onChange={e => setUser({...user, password: e.target.value})}
               
             />
-            <MyButton>Войти</MyButton>
+            <MyButton data-testid='login-button-element'>Войти</MyButton>
         </form>
-        <p className='mt-3'><Link to='/user-forgot-password'>Забыли Пароль?</Link></p>
+        <MyButton data-testid='forgot' onClick={() => router(`/user-forgot-password`, {replace: true})}>
+        Забыли Пароль?
+            </MyButton>
+        {/* <p className='mt-3'><Link data-testid='forgot' to='/user-forgot-password'>Забыли Пароль?</Link></p> */}
     </div>
   )
 }

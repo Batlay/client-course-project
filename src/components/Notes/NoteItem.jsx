@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card } from 'react-bootstrap';
-import CardHeader from 'react-bootstrap/esm/CardHeader';
 import MyButton from '../UI/Button/MyButton';
+import { useNavigate } from 'react-router-dom';
 
 const NoteItem = ({note}) => {
+  const router = useNavigate();
   var randomImages = [
     'https://www.gotokyo.org/en/story/guide/the-japanese-cherry-blossom-trees/images/main.jpg',
     'https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w=',
@@ -21,20 +21,8 @@ const NoteItem = ({note}) => {
 
     return (
      
-    // <Card mb={4}>
-    //     <Card.Body>
-    //         <h2><Card.Title>{note.title}</Card.Title></h2>
-    //         <Card.Text>
-    //                     {note.author}, {note.created_on}
-    //        </Card.Text>
-    //           <Card.Text>  
-    //                     {note.content}
-    //              </Card.Text>
-    //              <Link to={`/notes/${note.slug}`}>Подробнее</Link>
-    //     </Card.Body>
-    // </Card>
     <div>
-      <div className="card">
+      <div className="card" data-testid='note'>
         <div className="card__header">
           <img src="https://i.stack.imgur.com/QqRWG.jpg" alt="card__image" className="card__image" width="600" />
         </div>
@@ -58,7 +46,9 @@ const NoteItem = ({note}) => {
             <h5>{note.author}</h5>
             <small>{note.created_on}</small>
           </div>
-          <Link to={`/notes/${note.slug}`}>Подробнее</Link>
+          <MyButton data-testid='see_btn' onClick={() => router(`/notes/${note.slug}`, {replace: true})}>
+                            Посмотреть
+            </MyButton>
         </div>
       </div>
     </div>
