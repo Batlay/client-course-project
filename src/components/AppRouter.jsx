@@ -41,9 +41,9 @@ const AppRouter = () => {
 
   return (
     <>
-    <div className="navbar">
+    
     <NavbarPanel />
-    </div>
+   
     { group == 1 &&
     <Routes>  
         {privateRoutes.map(route => 

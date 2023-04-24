@@ -24,7 +24,7 @@ const NoteItem = ({note}) => {
     <div>
       <div className="card" data-testid='note'>
         <div className="card__header">
-          <img src="https://i.stack.imgur.com/QqRWG.jpg" alt="card__image" className="card__image" width="600" />
+          <img src="https://img.freepik.com/free-photo/creative-wallpaper-with-white-shapes_23-2148811498.jpg" alt="card__image" className="card__image" width="600" />
         </div>
         <div className="card__body">
           <span>{note.pupil}</span>

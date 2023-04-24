@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching'
 import axios from 'axios'
 import Loader from '../components/UI/Loader/Loader'
@@ -11,6 +11,7 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 
 const PupilPage = () => {
     const params = useParams()
+    const router = useNavigate()
     const [pupil, setPupil] = useState({})
     const [overall, setOverall] = useState({})
     const [result, setResult] = useState([])
@@ -73,7 +74,12 @@ const PupilPage = () => {
             {/* <button className="btn btn-link-dark"> */}
     
              {/* </button> */}
-             <Link to={`/pupils/report/${params.id}`}>Сформировать отчет</Link>
+             <center>
+             {/* <Link to={`/pupils/report/${params.id}`}>Сформировать отчет</Link> */}
+             <MyButton style={{width:'25%'}} data-testid='see_btn' onClick={() => router(`/pupils/report/${params.id}`, {replace: true})}>
+                            Сформировать отчет
+                        </MyButton>
+             </center>
              {/* <MyButton onClick={getPdf}>Cформировать отчет</MyButton>
              { pdf && <redirect to={{
             pathname: '/report',
@@ -83,11 +89,24 @@ const PupilPage = () => {
         </div>
 
         <div className="item item_3">
-        <Link to={`/pupils`}>Вернуться назад</Link>
+        {/* <Link to={`/pupils`}>Вернуться назад</Link> */}
+        <MyButton data-testid='see_btn' onClick={() => router(`/pupils`, {replace: true})}>
+                            Вернуться назад
+                        </MyButton>
             { !isLoading2 && <img src={`data:image/jpeg;base64,${overall}`} alt=''/> }
         </div>
 
-        <div className="item item_4"></div>
+        <div className="item item_4" style={{ 
+          backgroundImage: `url("http://localhost:8000/static/images/notes.jpg")` 
+        }}>
+
+        <div className="row h-100 ">
+                <div className=" row justify-content-center  my-auto">
+                    <MyButton style={{width:'50%'}} onClick={() => router(`/notes/person/${params.id}`, {replace: true})}>Посмотреть заметки</MyButton>
+                </div>
+            </div>
+
+        </div>
         <div className="item item_5">
             <h6>
                 Связь с учеником:
