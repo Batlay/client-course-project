@@ -8,9 +8,27 @@
   width: 100%;
 }
 
+.navb {
+  position: relative;
+}
 .navb:hover {
-  color: pink;
-  text-decoration: underline;
+  color: white;
+}
+.navb:after {
+  content: '';
+  opacity: 0;
+  transition: all 0.2s;
+  height: 2px;
+  width: 100%;
+  background-color: greenyellow;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+}
+
+.navb:hover::after{
+  opacity: 1;
 }
 
 .navb {  
@@ -18,5 +36,4 @@
   margin: 10px;  
   color: white;
   text-decoration: none;
-  
 }  

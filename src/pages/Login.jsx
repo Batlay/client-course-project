@@ -6,7 +6,8 @@ import axios from 'axios'
 import { UserContext } from '../context/userContext'
 import { Link, useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // export const UserContext = React.createContext();
 
@@ -37,6 +38,8 @@ const Login = () => {
           if (error.response) {
             console.log(error.response.data);
             console.log(error.response.status);
+            // toast.error("Не удалось войти. Проверьте корректность введенных вами данных")
+            toast.error(error.response.data)
           }
         });
     }
@@ -44,13 +47,11 @@ const Login = () => {
   return (
       // <div className='login' style={{backgroundImage:`http://localhost:8000/static/login_form.png`}}>
         
-    <div className='login' style={{ 
-      backgroundImage: `url("http://localhost:8000/static/images/login_form.png")` }}
-      >
+    <div className='login' >
         <div className='login_form'>
             <div className="row h-100">
             <div className=" row justify-content-center">
-                    <div className="col-md-7 col-10" >
+                    <div className="col-md-3 col-10" >
            {/* <Container>
                 <Row>
                 <Col md={8} col={10} my={5}> */}
