@@ -2,16 +2,36 @@ import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import { getPadTime } from '../../helpers/getPadTime';
 
 const Test4 = () => {
-    const [questions, setQuestions] = useState([])
-    const [answers, setAnswers] = useState([])
-    const router = useNavigate()
-  
+        const [questions, setQuestions] = useState([])
+        const [answers, setAnswers] = useState([])
+        const [isCounting, setIsCounting] = useState(false)
+        const [timeLeft, setTimeLeft] = useState(20)
+
+        const minutes = getPadTime(Math.floor(timeLeft / 60))
+        const seconds = getPadTime(timeLeft - minutes * 60)
+
+        
+       
+        const router = useNavigate()
+    
+        useEffect(() => {
+            if (timeLeft >= 1) {
+                const interval = setTimeout(() => {
+                    setTimeLeft(timeLeft - 1) 
+                }, 1000);
+            } else {
+                window.close()
+            }
+        });
+
         useEffect(() => {
             getQuestions()
         }, [])
-        
+
+            
         const getQuestions = async () => {
             const response = await axios.get('/api/tests/test4/')
             setQuestions(response.data)
@@ -43,7 +63,7 @@ const Test4 = () => {
     <>
     <div> 
          <div style={{backgroundColor: '#419D78', color: '#EFD0CA', fontSize: '20px', textAlign: 'center'}}>
-            Осталось времени: <span id="timer"></span>
+            Осталось времени: {minutes}:{seconds}<span id="timer"></span>
         </div> 
 
         <div className="container">

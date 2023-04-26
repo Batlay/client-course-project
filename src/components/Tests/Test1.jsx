@@ -49,7 +49,7 @@ const Test1 = () => {
             e.preventDefault();
   
             console.log(answers)
-            axios.post(`/api/tests/test1/answers/${userData.id}`, answers)
+            axios.post(`/api/tests/test1/answers/${userData?.id}`, answers)
              .then((response) => {
                 router(`/tests/`, {replace: true})
                 console.log(response.data)}
