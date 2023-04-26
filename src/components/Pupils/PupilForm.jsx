@@ -63,31 +63,39 @@ const PupilForm = ({create, visible}) => {
 
 
     return (
-        <form data-testid='2' >
+        <form data-testid='2' style={{ 
+            height: '50vh',
+            backgroundImage: `url("https://c0.wallpaperflare.com/preview/534/41/125/school-books-young-adult-education.jpg")`, backgroundSize:'auto' }}>
+                <center>
         <MyInput 
             value={pupil.fio}
             onChange={e => setPupil({...pupil, fio: e.target.value})}
             type='text' 
-            placeholder='ФИО ученика'/>
+            placeholder='ФИО ученика'
+            style={{width: '60%'}}/>
         <MyInput 
             value={pupil.phone}
             onChange={e => setPupil({...pupil, phone: e.target.value})}
             type='text' 
-            placeholder='Телефон: +375|80/29|25|44|33/XXXYYZZ'/>
+            placeholder='Телефон: +375|80/29|25|44|33/XXXYYZZ'
+            style={{width: '60%'}}/>
         <MyInput 
             value={pupil.email}
             onChange={e => setPupil({...pupil, email: e.target.value})}
             type='text' 
-            placeholder='Email: ivan.ivanov@gmail.com'/>
+            placeholder='Email: ivan.ivanov@gmail.com'
+            style={{width: '60%'}}/>
         <MyInput 
             // onChange={e => setPupil({...pupil, profile_pic: e.target.value})}
             onChange={e => onChange(e)}
             type="file"
             accept="image/png, image/jpeg"
             placeholder='Фото' 
-
+            style={{width: '60%', border: '1px solid black'}}
             />
+           <br></br>
         <MyButton  data-testid='add_button' onClick={addNewPupil}>Добавить ученика</MyButton>
+        </center>
     </form>
     )
 }

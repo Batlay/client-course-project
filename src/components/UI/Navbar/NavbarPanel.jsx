@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const NavbarPanel = () => {
   const {isAuth, setIsAuth} = useContext(AuthContext)
   const {value, setValue} = useContext(UserContext)
-  // console.log(value)
+
   const navigate = useNavigate();
   const logout =() => {
       setIsAuth(false)
@@ -22,41 +22,78 @@ const NavbarPanel = () => {
       navigate("/login");
   }
   
-   const group = JSON.parse(localStorage.getItem('user')).groups
+ let group = 0
+  if (isAuth === true) {
+     group = JSON.parse(localStorage.getItem('user')).groups
+  } else {
+     group = 0
+  }
+   
  
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+       {/* <Navbar className="color-nav"collapseOnSelect expand="lg" variant="light"> */}
       <Container>
         <Navbar.Brand href="">NewWay</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        {  !isAuth &&
+           <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Link className='navb' to="/">Главная страница</Link>
+          <Link className='navb' to="/about">О нас</Link>
+          <Link className='navb' to="/contacts">Контакты</Link>
+        </Nav>
+        <Nav>
+              <MyButton onClick={logout}>Войти</MyButton>
+          </Nav>
+        </Navbar.Collapse>
+        
+}
           { group == 1 &&
+           <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Link className='navb' to="/tests">Тесты</Link>
             <Link className='navb' to="/about">О нас</Link>
+            <Link className='navb' to="/contacts">Контакты</Link>
           </Nav>
-          }
-           { group == 2 &&
-          <Nav className="me-auto">
-            <Link className='navb' to="/administator/schools">Управление школами</Link>
-          </Nav>
-          }
-          { group == 3 &&
-          <Nav className="me-auto">
-            <Link className='navb' to="/pupils">Мой класс</Link>
-            <Link className='navb' to="/notes">Заметки</Link>
-            <Link className='navb' to="/about">О нас</Link>
-          </Nav>
-          }
-          { group == 4 &&
-          <Nav className="me-auto">
-            <Link className='navb' to="/schools">Cписок школ</Link>
-          </Nav>
-          }
           <Nav>
               <MyButton onClick={logout}>Выйти</MyButton>
           </Nav>
         </Navbar.Collapse>
+          }
+           { group == 2 &&
+            <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Link className='navb' to="/administator/schools">Управление школами</Link>
+          </Nav>
+          <Nav>
+              <MyButton onClick={logout}>Выйти</MyButton>
+          </Nav>
+        </Navbar.Collapse>
+          }
+          { group == 3 &&
+           <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Link className='navb' to="/pupils">Мой класс</Link>
+            <Link className='navb' to="/notes">Заметки</Link>
+            <Link className='navb' to="/about">О нас</Link>
+            <Link className='navb' to="/contacts">Контакты</Link>
+          </Nav>
+          <Nav>
+              <MyButton onClick={logout}>Выйти</MyButton>
+          </Nav>
+        </Navbar.Collapse>
+          }
+          { group == 4 &&
+           <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Link className='navb' to="/schools">Cписок школ</Link>
+          </Nav>
+          <Nav>
+              <MyButton onClick={logout}>Выйти</MyButton>
+          </Nav>
+        </Navbar.Collapse>
+          }
+        
       </Container>
     </Navbar>
   )

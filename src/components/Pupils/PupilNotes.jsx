@@ -24,7 +24,8 @@ const PupilNotes = ({pupils}) => {
         //         <h1>{pupil.fio}</h1>
         //     ))}       
         // </div>
-        <div className='container py-4 px-4 justify-content-center w-100' style={{ backgroundImage: `url("https://sun9-4.userapi.com/impg/qcf3nL_-9QVW3OD346BFl_cLs0i5BYDM6WHAUQ/8pF0X22qWx4.jpg?size=626x626&quality=96&sign=714dae6d79c5fe0b452a359d51004305&type=album")` , backgroundSize: 'cover'}}>
+        <div className='container py-4 px-4 justify-content-center w-100' 
+        style={{ backgroundImage: `url("https://thumbs.dreamstime.com/b/abstract-background-waves-white-green-mint-business-card-wallpaper-170337829.jpg")` , backgroundSize: 'cover'}}>
         {/* <div className='container py-4 px-4 justify-content-center w-100 bg-dark'> */}
             <Swiper
                 freeMode={true}

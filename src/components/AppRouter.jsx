@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom';
-import { privateRoutes, publicRoutes } from '../Router/routes';
+import { adminRoutes, publicRoutes, teacherRoutes, pupilRoutes, specRoutes } from '../Router/routes';
 import { AuthContext} from '../context';
 import Loader from './UI/Loader/Loader';
 import NavbarPanel from './UI/Navbar/NavbarPanel';
@@ -26,6 +26,8 @@ const AppRouter = () => {
   }
   if (!isAuth) {
     return (
+      <>
+      <NavbarPanel />
       <Routes>
          {publicRoutes.map(route => 
             <Route exact
@@ -36,17 +38,18 @@ const AppRouter = () => {
         )}
          {/* <Route  path = "/login" element={<Login />} key ='/login' /> */}
         {/* {<Route path="*" element={<Navigate to ="/login" />}/> } */}
-    </Routes> )
+    </Routes> 
+    </>)
   } else {
 
   return (
     <>
-    <div className="navbar">
+    
     <NavbarPanel />
-    </div>
+   
     { group == 1 &&
     <Routes>  
-        {privateRoutes.map(route => 
+        {pupilRoutes.map(route => 
             <Route exact
             element={route.component } 
             path={route.path}
@@ -58,7 +61,7 @@ const AppRouter = () => {
   } 
   { group == 2 &&
     <Routes>  
-        {privateRoutes.map(route => 
+        {adminRoutes.map(route => 
             <Route exact
             element={route.component } 
             path={route.path}
@@ -70,19 +73,19 @@ const AppRouter = () => {
   }
   { group == 3 &&
     <Routes>
-        {privateRoutes.map(route => 
+        {teacherRoutes.map(route => 
             <Route exact
             element={route.component } 
             path={route.path}
             key={route.path}
             />
         )}
-         {<Route path="/login" element={<Navigate to ="/about" />}/> }
+         {<Route path="/login" element={<Navigate to ="/pupils" />}/> }
     </Routes>
   }
    { group == 4 &&
     <Routes>
-        {privateRoutes.map(route => 
+        {specRoutes.map(route => 
             <Route exact
             element={route.component } 
             path={route.path}

@@ -65,7 +65,7 @@ describe('Главная страница ученика', () => {
         
         })
         
-        test("Список тестов2", async () => {
+        test("Тест", async () => {
             const mockedAxiosPost = (axios.post = jest.fn().mockResolvedValue({}));
             render(<Test1 />);
             

@@ -3,6 +3,8 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import MyButton from '../UI/Button/MyButton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+// import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 
 const Report = () => {

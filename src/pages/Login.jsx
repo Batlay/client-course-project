@@ -5,6 +5,9 @@ import { AuthContext } from '../context'
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
 import { Link, useNavigate } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // export const UserContext = React.createContext();
 
@@ -35,29 +38,61 @@ const Login = () => {
           if (error.response) {
             console.log(error.response.data);
             console.log(error.response.status);
+            // toast.error("Не удалось войти. Проверьте корректность введенных вами данных")
+            toast.error(error.response.data)
           }
         });
     }
 
   return (
-    <div>
-        <form onSubmit={login} aria-label="form">
-            <MyInput 
-              value={user.username}
-            type='text' placeholder='Введите  логин'
-              onChange={e => setUser({...user, username: e.target.value})}
-            />
-            <MyInput 
-            value={user.password}
-            type='password' placeholder='Введите  пароль'
-              onChange={e => setUser({...user, password: e.target.value})}
-              
-            />
-            <MyButton data-testid='login-button-element'>Войти</MyButton>
-        </form>
-        <MyButton data-testid='forgot' onClick={() => router(`/user-forgot-password`, {replace: true})}>
-        Забыли Пароль?
-            </MyButton>
+      // <div className='login' style={{backgroundImage:`http://localhost:8000/static/login_form.png`}}>
+        
+    <div className='login' >
+        <div className='login_form'>
+            <div className="row h-100">
+            <div className=" row justify-content-center">
+                    <div className="col-md-3 col-10" >
+           {/* <Container>
+                <Row>
+                <Col md={8} col={10} my={5}> */}
+                    <center>
+                      <h6 h6 >Добро пожаловать!</h6>
+                      <h6 >Пожалуйста, войдите в ваш аккаунт</h6>
+                    </center>
+
+                    <form onSubmit={login} aria-label="form">
+                        <MyInput 
+                          value={user.username}
+                        type='text' placeholder='Введите  логин'
+                          onChange={e => setUser({...user, username: e.target.value})}
+                        />
+                        <MyInput 
+                        value={user.password}
+                        type='password' placeholder='Введите  пароль'
+                          onChange={e => setUser({...user, password: e.target.value})}
+                          
+                        />
+                        <center>
+                        <MyButton data-testid='login-button-element'>Войти</MyButton>
+                        </center>
+                    </form>   
+        {/* <MyButton data-testid='forgot' onClick={() => router(`/user-forgot-password`, {replace: true})}>
+            Забыли Пароль?
+            </MyButton> */}
+            <center>
+            <div className="row justify-content-center my-2"> 
+              <a href="/user-forgot-password" >
+                <small className="text-muted">Забыли пароль?</small>
+              </a> 
+            </div>
+            </center>
+            {/* </Col>
+                </Row>
+            </Container> */}
+   </div>
+      </div>
+      </div>
+      </div>
         {/* <p className='mt-3'><Link data-testid='forgot' to='/user-forgot-password'>Забыли Пароль?</Link></p> */}
     </div>
   )
