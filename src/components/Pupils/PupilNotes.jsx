@@ -24,8 +24,8 @@ const PupilNotes = ({pupils}) => {
         //         <h1>{pupil.fio}</h1>
         //     ))}       
         // </div>
-        <div className='container py-4 px-4 justify-content-center w-100' 
-        style={{ backgroundImage: `url("https://thumbs.dreamstime.com/b/abstract-background-waves-white-green-mint-business-card-wallpaper-170337829.jpg")` , backgroundSize: 'cover'}}>
+        <div className='container py-4 px-4 justify-content-center w-100 ' 
+        style={{ boxShadow: '-8px -3px 8px 0px rgba(34, 60, 80, 0.2)', backgroundImage: `url("https://newway.herokuapp.com/static/images/note_pupil_form.jpg")` , backgroundSize: 'cover'}}>
         {/* <div className='container py-4 px-4 justify-content-center w-100 bg-dark'> */}
             <Swiper
                 freeMode={true}
@@ -57,7 +57,7 @@ const PupilNotes = ({pupils}) => {
             >
                 {pupils.map(pupil => 
                 <SwiperSlide>
-                    <PupilCard data={{imgSrc: `http://localhost:8000/static${pupil.profile_pic}`, title: pupil.fio, id: pupil.id
+                    <PupilCard data={{imgSrc: `https://newway.herokuapp.com/static${pupil.profile_pic}`, title: pupil.fio, id: pupil.id
                 }}/>
                 </SwiperSlide>
       )}

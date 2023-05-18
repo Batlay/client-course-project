@@ -43,7 +43,7 @@ const NavbarPanel = () => {
           <Link className='navb' to="/contacts">Контакты</Link>
         </Nav>
         <Nav>
-              <MyButton onClick={logout}>Войти</MyButton>
+              <MyButton onClick={logout} style={{borderRadius: '5px'}}>Войти</MyButton>
           </Nav>
         </Navbar.Collapse>
         
@@ -52,11 +52,9 @@ const NavbarPanel = () => {
            <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Link className='navb' to="/tests">Тесты</Link>
-            <Link className='navb' to="/about">О нас</Link>
-            <Link className='navb' to="/contacts">Контакты</Link>
           </Nav>
           <Nav>
-              <MyButton onClick={logout}>Выйти</MyButton>
+              <MyButton onClick={logout} style={{borderRadius: '5px'}}>Выйти</MyButton>
           </Nav>
         </Navbar.Collapse>
           }
@@ -66,7 +64,7 @@ const NavbarPanel = () => {
             <Link className='navb' to="/administator/schools">Управление школами</Link>
           </Nav>
           <Nav>
-              <MyButton onClick={logout}>Выйти</MyButton>
+              <MyButton onClick={logout} style={{borderRadius: '5px'}}>Выйти</MyButton>
           </Nav>
         </Navbar.Collapse>
           }
@@ -79,7 +77,7 @@ const NavbarPanel = () => {
             <Link className='navb' to="/contacts">Контакты</Link>
           </Nav>
           <Nav>
-              <MyButton onClick={logout}>Выйти</MyButton>
+              <MyButton onClick={logout} style={{borderRadius: '5px'}}>Выйти</MyButton>
           </Nav>
         </Navbar.Collapse>
           }
@@ -89,7 +87,7 @@ const NavbarPanel = () => {
             <Link className='navb' to="/schools">Cписок школ</Link>
           </Nav>
           <Nav>
-              <MyButton onClick={logout}>Выйти</MyButton>
+              <MyButton onClick={logout} style={{borderRadius: '5px'}}>Выйти</MyButton>
           </Nav>
         </Navbar.Collapse>
           }

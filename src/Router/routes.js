@@ -1,27 +1,29 @@
 import About from "../pages/About";
 import Login from "../pages/Login";
-import NotePage from "../pages/NotePage";
-import Notes from '../pages/Notes'
-import Pupils from "../pages/Pupils";
-import PupilPage from "../pages/PupilPage";
-import PersonNotes from "../pages/PersonNotes";
-import Tests from "../pages/Tests";
+import NotePage from "../pages/Notes/NotePage";
+import Notes from '../pages/Notes/Notes'
+import Pupils from "../pages/Teacher/Pupils";
+import PupilPage from "../pages/Teacher/PupilPage";
+import PersonNotes from "../pages/Notes/PersonNotes";
+import Tests from "../pages/Tests/Tests";
 import Test4 from "../components/Tests/Test4";
 import Test3 from "../components/Tests/Test3";
 import Test2 from "../components/Tests/Test2";
 import Test1 from "../components/Tests/Test1";
 import Report from "../components/Report/Report";
-import ResetPassword from "../pages/ResetPassword";
-import ChangePassword from "../pages/ChangePassword";
-import Schools from "../pages/Schools";
-import Classrooms from "../pages/Classrooms";
+import ResetPassword from "../pages/Password/ResetPassword";
+import ChangePassword from "../pages/Password/ChangePassword";
+import Schools from "../pages/Specialist/Schools";
+import Classrooms from "../pages/Specialist/Classrooms";
 import ClassroomPupils from "../components/Pupils/ClassroomPupils";
-import Specialist from "../pages/Specialist";
+import Specialist from "../pages/Specialist/Specialist";
 import EditSchools from "../pages/Admin/EditSchools";
 import EditPupils from "../pages/Admin/EditPupils";
 import EditClassrooms from "../pages/Admin/EditClassrooms";
 import Contacts from "../pages/Contacts";
 import Main from "../pages/Main";
+import Form from "../pages/Teacher/Form";
+import SuccessChanged from "../pages/Password/SuccessChanged";
 
 export const adminRoutes = [
     {path: '/contacts', component: <Contacts />, exact: true},
@@ -38,12 +40,11 @@ export const teacherRoutes = [
     {path: '/notes/person/:id', component: <PersonNotes/>, exact: true},
     {path: '/pupils', component: <Pupils />, exact: true},
     {path: '/pupils/:id', component: <PupilPage />, exact: true},
+    {path: '/pupils/form/:id', component: <Form />, exact: true},
     {path: '/pupils/report/:id', component: <Report />, exact: true},
 ]
 
 export const pupilRoutes = [
-    {path: '/contacts', component: <Contacts />, exact: true},
-    {path: '/about', component: <About />, exact: true},
     {path: '/tests/', component: <Tests />, exact: true},
     {path: '/tests/test4', component: <Test4 />, exact: true},
     {path: '/tests/test3', component: <Test3 />, exact: true},
@@ -67,4 +68,5 @@ export const publicRoutes = [
     {path: '/contacts', component: <Contacts />, exact: true},
     {path: '/user-forgot-password', component: <ResetPassword />, exact: true},
     {path: '/user-change-password/:id', component: <ChangePassword />, exact: true},
+    {path: '/success-change-password', component: <SuccessChanged />, exact: true},
 ]

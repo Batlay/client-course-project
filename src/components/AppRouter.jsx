@@ -44,9 +44,6 @@ const AppRouter = () => {
 
   return (
     <>
-    
-    <NavbarPanel />
-   
     { group == 1 &&
     <Routes>  
         {pupilRoutes.map(route => 
@@ -57,9 +54,12 @@ const AppRouter = () => {
             />
         )}
         {<Route path="/login" element={<Navigate to ="/tests" />}/> }
+        {<Route path="" element={<Navigate to ="/tests" />}/> }
     </Routes>
   } 
   { group == 2 &&
+    <>
+    <NavbarPanel />
     <Routes>  
         {adminRoutes.map(route => 
             <Route exact
@@ -69,9 +69,13 @@ const AppRouter = () => {
             />
         )}
         {<Route path="/login" element={<Navigate to ="/administator/schools" />}/> }
+        {<Route path="" element={<Navigate to ="/administator/schools" />}/> }
     </Routes>
+    </>
   }
   { group == 3 &&
+    <>
+    <NavbarPanel />
     <Routes>
         {teacherRoutes.map(route => 
             <Route exact
@@ -81,9 +85,13 @@ const AppRouter = () => {
             />
         )}
          {<Route path="/login" element={<Navigate to ="/pupils" />}/> }
+         {<Route path="" element={<Navigate to ="/pupils" />}/> }
     </Routes>
+    </>
   }
    { group == 4 &&
+    <>
+    <NavbarPanel />
     <Routes>
         {specRoutes.map(route => 
             <Route exact
@@ -93,7 +101,9 @@ const AppRouter = () => {
             />
         )}
          {<Route path="/login" element={<Navigate to ="/schools" />}/> }
+         {<Route path="" element={<Navigate to ="/schools" />}/> }
     </Routes>
+    </>
   }
     </>
   )

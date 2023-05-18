@@ -9,9 +9,9 @@ const PupilCard = (props) => {
     let {imgSrc, title, id} = props.data
     const router = useNavigate()
     return (
-       <Card className='p-0 overflow-hidden w-100 shadow '>
+       <Card className='p-0 overflow-hidden w-100 shadow ' style={{border: '1px solid rgba(0, 0, 0, 0.5)'}}>
             <div style={{ width: 200}}>
-                <Card.Img variant='top' className='w-200' style={{height: 150, width: 150}} src={imgSrc} />
+                <Card.Img variant='top' className='w-200' style={{height: 125, width: 150}} src={imgSrc} />
             </div>
             <Card.Body className='text-center'>
                 <Card.Title style={{fontSize: 16, height: 50}}>{title}</Card.Title>
@@ -19,7 +19,7 @@ const PupilCard = (props) => {
             {/* <Button className='w-100 rounded-0' variant='success'>Посмотреть</Button> */}
             {/* <Link to={`/notes/person/${id}`}>Подробнее</Link> */}
             <div className=" row justify-content-center  my-auto">
-            <MyButton style={{width: '70%'}} onClick={() => router(`/notes/person/${id}`, {replace: true})}>Подробнее</MyButton>
+            <MyButton style={{width: '70%', borderRadius: '5px', borderColor: 'black', color: 'black'}} onClick={() => router(`/notes/person/${id}`, {replace: true})}>Подробнее</MyButton>
            </div>
        </Card>
     )

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useFetching } from '../hooks/useFetching'
+import { useFetching } from '../../hooks/useFetching'
 import axios from 'axios'
-import Loader from '../components/UI/Loader/Loader'
-import MyButton from '../components/UI/Button/MyButton'
-import { Link } from 'react-router-dom'
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-
+import Loader from '../../components/UI/Loader/Loader'
+import MyButton from '../../components/UI/Button/MyButton'
 
 
 const PupilPage = () => {
@@ -53,12 +50,12 @@ const PupilPage = () => {
     <div className='cont'>
 
         <div className="item item_1"> 
-            <h1>
+            <h3>
                 {pupil.fio}
-            </h1>
+            </h3>
             {
             pupil.profile_pic &&
-            <img src={`http://localhost:8000/static${pupil.profile_pic}`} alt=''/>}
+            <img src={`https://newway.herokuapp.com/static${pupil.profile_pic}`} alt=''/>}
         </div> 
 
         <div className="item item_2"> 
@@ -76,7 +73,7 @@ const PupilPage = () => {
              {/* </button> */}
              <center>
              {/* <Link to={`/pupils/report/${params.id}`}>Сформировать отчет</Link> */}
-             <MyButton style={{width:'25%'}} data-testid='see_btn' onClick={() => router(`/pupils/report/${params.id}`, {replace: true})}>
+             <MyButton style={{width:'25%',borderRadius: '5px'}} data-testid='see_btn' onClick={() => router(`/pupils/report/${params.id}`, {replace: true})}>
                             Сформировать отчет
                         </MyButton>
              </center>
@@ -90,19 +87,18 @@ const PupilPage = () => {
 
         <div className="item item_3">
         {/* <Link to={`/pupils`}>Вернуться назад</Link> */}
-        <MyButton data-testid='see_btn' onClick={() => router(`/pupils`, {replace: true})}>
+        <MyButton  style={{borderRadius: '5px'}} data-testid='see_btn' onClick={() => router(`/pupils`, {replace: true})}>
                             Вернуться назад
                         </MyButton>
             { !isLoading2 && <img src={`data:image/jpeg;base64,${overall}`} alt=''/> }
         </div>
 
         <div className="item item_4" style={{ 
-          backgroundImage: `url("http://localhost:8000/static/images/notes.jpg")` 
+          backgroundImage:`url("https://newway.herokuapp.com/static/images/notes.jpg")`
         }}>
-
         <div className="row h-100 ">
                 <div className=" row justify-content-center  my-auto">
-                    <MyButton style={{width:'50%'}} onClick={() => router(`/notes/person/${params.id}`, {replace: true})}>Посмотреть заметки</MyButton>
+                    <MyButton style={{width:'50%', borderRadius: '5px'}} onClick={() => router(`/notes/person/${params.id}`, {replace: true})}>Посмотреть заметки</MyButton>
                 </div>
             </div>
 

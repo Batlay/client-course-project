@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
-import ClassroomList from '../components/Classrooms/ClassroomList';
+import ClassroomList from '../../components/Classrooms/ClassroomList';
 import { useParams } from 'react-router-dom';
 
 const Classrooms = () => {
@@ -28,7 +28,7 @@ const Classrooms = () => {
         <Row>
             <Col md={7} mt={3}>
                 <ClassroomList classrooms={classrooms} /></Col>
-            <Col>Список классов</Col>
+            <Col></Col>
         </Row>
     </Container>
     )

@@ -1,7 +1,8 @@
 import React from 'react'
-import MyInput from '../UI/Input/MyInput'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import MyButton from '../UI/Button/MyButton'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const PupilForm = ({create, visible}) => {
     const [pupil, setPupil] = useState(
@@ -15,10 +16,10 @@ const PupilForm = ({create, visible}) => {
     const addNewPupil = (e) => {
         e.preventDefault()
         if (!isValidPhone(pupil.phone)) {
-            console.log('Введите корректный телефон')
+            toast.error('Введите корректный номер телефона')
         } 
         else if (!isValidEmail(pupil.email)) {
-            console.log('Введите корректный email')
+            toast.error('Введите корректный email')
         } 
         else {
             const newPupil = {
@@ -57,46 +58,67 @@ const PupilForm = ({create, visible}) => {
     }
 
     function isValidPhone(phone) {
-        // return  /^[+]375 [(][0-9]{2}[)] [0-9]{3}[-][0-9]{2}[-][0-9]{2}$/.test(phone);
         return  /^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$/.test(phone);
     }
 
 
     return (
-        <form data-testid='2' style={{ 
+        <form onSubmit={addNewPupil} style={{ 
             height: '50vh',
-            backgroundImage: `url("https://c0.wallpaperflare.com/preview/534/41/125/school-books-young-adult-education.jpg")`, backgroundSize:'auto' }}>
-                <center>
-        <MyInput 
-            value={pupil.fio}
-            onChange={e => setPupil({...pupil, fio: e.target.value})}
-            type='text' 
-            placeholder='ФИО ученика'
-            style={{width: '60%'}}/>
-        <MyInput 
-            value={pupil.phone}
-            onChange={e => setPupil({...pupil, phone: e.target.value})}
-            type='text' 
-            placeholder='Телефон: +375|80/29|25|44|33/XXXYYZZ'
-            style={{width: '60%'}}/>
-        <MyInput 
-            value={pupil.email}
-            onChange={e => setPupil({...pupil, email: e.target.value})}
-            type='text' 
-            placeholder='Email: ivan.ivanov@gmail.com'
-            style={{width: '60%'}}/>
-        <MyInput 
-            // onChange={e => setPupil({...pupil, profile_pic: e.target.value})}
-            onChange={e => onChange(e)}
-            type="file"
-            accept="image/png, image/jpeg"
-            placeholder='Фото' 
-            style={{width: '60%', border: '1px solid black'}}
+            width: '50vw',
+            backgroundImage: 'url("https://newway.herokuapp.com/static/images/flower.jpg")', backgroundSize:'cover' }}>
+        <center>
+        <br/>
+            <input 
+                required
+                className="form-control" 
+                value={pupil.fio}
+                onChange={e => setPupil({...pupil, fio: e.target.value})}
+                type='text' 
+                placeholder='ФИО ученика'
+                style={{width: '60%'}}  />
+            <input 
+                required
+                className="form-control" 
+                value={pupil.phone}
+                onChange={e => setPupil({...pupil, phone: e.target.value})}
+                type='text' 
+                placeholder='Телефон: +375|80 29|25|44|33 XXXYYZZ (без пробелов)'
+                style={{margin: '10px',width: '60%'}}  />
+            <input 
+                required
+                type="text" 
+                className="form-control" 
+                placeholder='Email: ivan.ivanov@gmail.com' 
+                style={{margin: '10px',width: '60%'}}  
+                value={pupil.email}
+                onChange={e => setPupil({...pupil, email: e.target.value})} />
+            <label for="avatar">Выберите фото профиля ученика (необязательно)</label>
+            <br/>
+            <input
+                // onChange={e => setPupil({...pupil, profile_pic: e.target.value})}
+                onChange={e => onChange(e)}
+                type="file"
+                accept="image/png, image/jpeg"
+                placeholder='Фото' 
+                style={{width: '60%', margin: '10px'}}
+                />
+            <br/>
+                <MyButton  data-testid='add_button' type='submit' style={{borderRadius: '5px'}}>Добавить ученика</MyButton>
+            </center>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
             />
-           <br></br>
-        <MyButton  data-testid='add_button' onClick={addNewPupil}>Добавить ученика</MyButton>
-        </center>
-    </form>
+        </form>
     )
 }
 

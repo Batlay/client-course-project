@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import NotesList from '../components/Notes/NotesList'
+import NotesList from '../../components/Notes/NotesList'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyButton from "../components/UI/Button/MyButton";
-import MyModal from "../components/UI/Modal/MyModal";
-import NoteForm from '../components/Notes/NoteForm';
+import MyButton from "../../components/UI/Button/MyButton";
+import MyModal from "../../components/UI/Modal/MyModal";
+import NoteForm from '../../components/Notes/NoteForm';
 import axios from 'axios'
-import PupilNotes from '../components/Pupils/PupilNotes';
+import PupilNotes from '../../components/Pupils/PupilNotes';
 
 
 

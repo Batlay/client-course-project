@@ -1,13 +1,30 @@
 import axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import RadioButton from '../UI/RB/RadioButton';
+import { getPadTime } from '../../helpers/getPadTime';
+import MyButton from '../UI/Button/MyButton';
 
 const Test2 = () => {
-    const [questions, setQuestions] = useState([])
-    const [answers, setAnswers] = useState([])
-    const router = useNavigate()
-  
+        const [questions, setQuestions] = useState([])
+        const [answers, setAnswers] = useState([])
+        const [timeLeft, setTimeLeft] = useState(15*60)
+        const form = useRef()
+        const userData = JSON.parse(localStorage.getItem('user'))
+        
+        const minutes = getPadTime(Math.floor(timeLeft / 60))
+        const seconds = getPadTime(timeLeft - minutes * 60)
+   
+        useEffect(() => {
+            if (timeLeft >= 1) {
+                const interval = setTimeout(() => {
+                    setTimeLeft(timeLeft - 1) 
+                }, 1000);
+            } else {
+                handleSubmitOnTime()
+            }
+        });
+
         useEffect(() => {
             getQuestions()
         }, [])
@@ -19,19 +36,36 @@ const Test2 = () => {
 
         const handleSubmit = e => {
             e.preventDefault();
+            var userInfo = {
+                userdata: userData,
+                answers: answers
+              }
             console.log(answers)
-            axios.post('/api/tests/test2/answers/', answers)
-             .then(router(`/tests/`, {replace: true}));
+            axios.post('/api/tests/test2/answers/', userInfo)
+             .then(() => {
+                window.close()
+            });
         };
 
+        const handleSubmitOnTime = () => {
+            console.log(answers)
+            var userInfo = {
+                userdata: userData,
+                answers: answers
+              }
+            axios.post('/api/tests/test2/answers/', userInfo)
+              .then(() => {
+                window.close()
+            });
+        };
 
 
 
   return (
     <>
     <div> 
-         <div style={{backgroundColor: '#419D78', color: '#EFD0CA', fontSize: '20px', textAlign: 'center'}}>
-            Осталось времени: <span id="timer"></span>
+    <div style={{backgroundColor: '#419D78', color: 'white', fontSize: '20px', textAlign: 'center'}}>
+            Осталось времени: {minutes}:{seconds}<span id="timer"></span>
         </div> 
 
     <div className="container">
@@ -45,7 +79,7 @@ const Test2 = () => {
     <hr/>
     <div>
 
-    <form onSubmit={handleSubmit}>
+    <form ref={form} onSubmit={handleSubmit}>
     { questions.map((q) => (
         <div>
         <table>
@@ -54,40 +88,37 @@ const Test2 = () => {
             </tr>
             <tr>
                 <td>
-                    <input 
-                    type = "radio" 
-                    className="rb" 
-                    name = {q.question} 
-                    value={q.option1} 
-                    onChange={() => 
-                    setAnswers((answer) => ({
-                        ...answer,
-                        [q.id]: q.option1
-                    }))}
-                    required />
-                    {q.option1}
+                <RadioButton  type = "radio" 
+                        className="radio-input" 
+                        name = {q.question} 
+                        value={q.option1} 
+                        onChange={() => 
+                        setAnswers((answer) => ({
+                            ...answer,
+                            [q.id]: q.option1
+                        }))} />{q.option1}
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input 
-                    type = "radio" 
-                    className="rb" 
-                    name = {q.question} 
-                    value={q.option2} 
-                    onChange={() => 
-                    setAnswers((answer) => ({
-                        ...answer,
-                        [q.id]: q.option2
-                    }))} />
-                    {q.option2}
+                <RadioButton    type = "radio" 
+                        className="radio-input" 
+                        name = {q.question} 
+                        value={q.option2} 
+                        onChange={() => 
+                        setAnswers((answer) => ({
+                            ...answer,
+                            [q.id]: q.option2
+                        }))}/>{q.option2}
                 </td>
             </tr>
         </table>
 <hr />
 </div>
     ))}
-        <input type="submit" className="btn btn-success" value="Сохранить" />
+       <center>
+            <MyButton style={{borderRadius: '5px'}} data-testid='save_button' type='submit' >Сохранить</MyButton>
+        </center>
     </form>
     </div>
 </div>

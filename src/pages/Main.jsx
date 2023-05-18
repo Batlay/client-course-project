@@ -12,9 +12,7 @@ const Main = () => {
       <div className="image">
           <img src=''/>
       </div>
-      <p>
-      Диагностика творческого потенциала
-      </p>
+
       <button onClick={() => router(`/about`, {replace: true})}>Узнать больше</button>
   </div>
     );

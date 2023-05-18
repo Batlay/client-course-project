@@ -1,7 +1,7 @@
 import React from 'react'
 import PupilItem from './PupilItem'
 
-const PupilList = ({pupils, spec}) => {
+const PupilList = ({pupils, spec=false}) => {
 
     if (!pupils.length) {
       return (
@@ -16,15 +16,25 @@ const PupilList = ({pupils, spec}) => {
       <div>
            <table className="table table-hover">
                 <thead className="thead-dark">
-                    <tr>
+                  {spec 
+                    ?<tr>
+                    <th></th>
                         <th>ФИО</th>
                         <th>Email</th>
                         <th>Посмотреть</th>
-                        <th>Форма</th>
                     </tr>
+                    :
+                    <tr>
+                    <th></th>
+                        <th>ФИО</th>
+                        <th>Email</th>
+                        <th style={{ textAlign: 'center'}}>Форма</th>
+                        <th>Посмотреть</th>
+                    </tr>
+                    }
                 </thead>
           {pupils.map((pupil, index) => (
-                <PupilItem  pupil={pupil} spec={spec} />
+                <PupilItem  pupil={pupil} index={index} spec={spec} />
             ))}
                 </table>
       </div>

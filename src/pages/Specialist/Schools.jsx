@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
-import SchoolList from '../components/Schools/SchoolList';
+import SchoolList from '../../components/Schools/SchoolList';
 
 const Schools = () => {
 
@@ -12,12 +12,11 @@ const Schools = () => {
         
         useEffect(() => {
             getSchools()
-        }, [schools])
+        }, [])
         
         const getSchools = async () => {
             const response = await axios.get('/api/schools/')
-            setSchools(response.data)
-            
+            setSchools(response.data)         
         }
 
 
@@ -27,7 +26,7 @@ const Schools = () => {
         <Row>
             <Col md={7} mt={3}>
                 <SchoolList schools={schools} /></Col>
-            <Col>Список школ</Col>
+            <Col></Col>
         </Row>
     </Container>
     )

@@ -39,7 +39,7 @@ const Login = () => {
             console.log(error.response.data);
             console.log(error.response.status);
             // toast.error("Не удалось войти. Проверьте корректность введенных вами данных")
-            toast.error(error.response.data)
+            toast.error(error.response.data.Error)
           }
         });
     }
@@ -61,19 +61,25 @@ const Login = () => {
                     </center>
 
                     <form onSubmit={login} aria-label="form">
-                        <MyInput 
+                        <input 
+                          style={{margin: '10px'}}
+                          required
+                          className="form-control" 
                           value={user.username}
-                        type='text' placeholder='Введите  логин'
+                          type='text' placeholder='Введите  логин'
                           onChange={e => setUser({...user, username: e.target.value})}
                         />
-                        <MyInput 
-                        value={user.password}
-                        type='password' placeholder='Введите  пароль'
+                        <input 
+                          style={{margin: '10px'}}
+                          required
+                          className="form-control" 
+                          value={user.password}
+                          type='password' placeholder='Введите  пароль'
                           onChange={e => setUser({...user, password: e.target.value})}
                           
                         />
                         <center>
-                        <MyButton data-testid='login-button-element'>Войти</MyButton>
+                        <button data-testid='login-button-element'>Войти</button>
                         </center>
                     </form>   
         {/* <MyButton data-testid='forgot' onClick={() => router(`/user-forgot-password`, {replace: true})}>
@@ -93,7 +99,18 @@ const Login = () => {
       </div>
       </div>
       </div>
-        {/* <p className='mt-3'><Link data-testid='forgot' to='/user-forgot-password'>Забыли Пароль?</Link></p> */}
+      <ToastContainer
+    position="bottom-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+/>  {/* <p className='mt-3'><Link data-testid='forgot' to='/user-forgot-password'>Забыли Пароль?</Link></p> */}
     </div>
   )
 }

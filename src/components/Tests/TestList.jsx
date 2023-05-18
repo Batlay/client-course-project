@@ -1,7 +1,7 @@
 import React from 'react'
 import TestItem from './TestItem'
 
-const TestList = ({tests}) => {
+const TestList = ({tests, results}) => {
 
     if (!tests.length) {
       return (
@@ -23,7 +23,7 @@ const TestList = ({tests}) => {
                     </tr>
                 </thead>
           {tests.map((test, index) => (
-                <TestItem test={test} />
+                <TestItem test={test} results={results} />
             ))}
                 </table>
       </div>

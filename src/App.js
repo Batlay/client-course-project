@@ -1,17 +1,16 @@
 import './styles/app.css'
 import './styles/navbar.css'
 import { BrowserRouter as Router} from 'react-router-dom';
-import NavbarPanel from './components/UI/Navbar/NavbarPanel';
 import AppRouter from './components/AppRouter';
 import { AuthContext } from './context';
 import { useEffect, useState } from 'react';
-import NotesListPage from './components/Notes/NotesList.jsx';
 import { UserContext } from './context/userContext';
 
 function App() {
         const [isAuth, setIsAuth] = useState(false)
         const [isLoading, setIsLoading] = useState(true)
         const [value, setValue] = useState([])
+
 
         useEffect(() => {
             if(localStorage.getItem('auth')) {

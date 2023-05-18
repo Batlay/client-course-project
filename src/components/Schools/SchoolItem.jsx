@@ -83,7 +83,7 @@ const SchoolItem = ({school, admin = false}) => {
         <tbody>
         <tr>
             <td>{school.name}</td>
-            <td>  <MyButton onClick={() => router(`/schools/${school.id}`, {replace: true})}>
+            <td>  <MyButton style={{borderRadius: '5px'}}  onClick={() => router(`/schools/${school.id}`, {replace: true})}>
               Посмотреть
           </MyButton></td>
         </tr>

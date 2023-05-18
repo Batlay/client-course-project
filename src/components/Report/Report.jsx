@@ -46,21 +46,8 @@ const Report = () => {
 		console.log(pdf)
 	}
 
-	const downloadPdf = async() => {
-		await axios.get(`/api/pupils/report/download/${params.id}`, {responseType: 'arraybuffer'})
-		.then((response) => {
-			setPdf(response.data)
-		})    
-		.catch(error => {
-			if (error.response) {
-			  console.log(error.response.data);
-			}
-		  });
-		console.log(pdf)
-	}
 
 	const onButtonClick = () => {
-		downloadPdf()
 		const url = window.URL.createObjectURL(new Blob([new Uint8Array(pdf).buffer])); 
 		const link = document.createElement('a'); 
 		link.href = url; 
@@ -70,14 +57,14 @@ const Report = () => {
     }
 
 	return (
-		<div style={{margin: 'auto', width: '50%'}}>
+		<div className='App'>
 			<nav>
-				<MyButton data-testid='prev' onClick={goToPrevPage}>Назад</MyButton>
-				<MyButton data-testid='next' onClick={goToNextPage}>Далее</MyButton>
+				<MyButton onClick={goToPrevPage}>Назад</MyButton>
+				<MyButton onClick={goToNextPage}>Далее</MyButton>
 				<p>
 					Page {pageNumber} of {numPages}
 				</p>
-				<button onClick={onButtonClick} data-testid='pdf_button'>
+				<button onClick={onButtonClick} >
                     Скачать PDF файл
                 </button>
 			</nav>

@@ -28,7 +28,7 @@ const ClassroomPupils = () => {
         <Row>
             <Col md={7} mt={3}>
                 <PupilList pupils={pupils} spec={true} /></Col>
-            <Col>Список учеников</Col>
+            <Col></Col>
         </Row>
     </Container>
     )

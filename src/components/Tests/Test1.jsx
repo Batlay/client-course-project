@@ -1,58 +1,63 @@
 import axios from 'axios'
-import React, {useState} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useRef, useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { useContext } from 'react';
 import { UserContext } from '../../context/userContext';
 import MyButton from '../UI/Button/MyButton';
+import { getPadTime } from '../../helpers/getPadTime';
 
 const Test1 = () => {
 
-    // const arr = [
-    //     {
-    //         id: 1,
-    //         value: 25,
-    //         n: 'Здоровье'
-    //     },
-    //     {
-    //         id: 2,
-    //         value: 18,
-    //         n: 'Сила'
-    //     },
-    // ];
-    // const [array, setArray] = useState(arr)
-    const {value, setValue} = useContext(UserContext)
-    const [value1, setValue1] = useState(0)
-    const [value2, setValue2] = useState(0)
-    const [value3, setValue3] = useState(0)
-    const [value4, setValue4] = useState(0)
-    const [value5, setValue5] = useState(0)
-    const [value6, setValue6] = useState(0)
-    const [value7, setValue7] = useState(0)
-    const [value11, setValue11] = useState(0)
-    const [value22, setValue22] = useState(0)
-    const [value33, setValue33] = useState(0)
-    const [value44, setValue44] = useState(0)
-    const [value55, setValue55] = useState(0)
-    const [value66, setValue66] = useState(0)
-    const [value77, setValue77] = useState(0)
-    const userData = JSON.parse(localStorage.getItem('user'))
+        const {value, setValue} = useContext(UserContext)
+        const [value1, setValue1] = useState(0)
+        const [value2, setValue2] = useState(0)
+        const [value3, setValue3] = useState(0)
+        const [value4, setValue4] = useState(0)
+        const [value5, setValue5] = useState(0)
+        const [value6, setValue6] = useState(0)
+        const [value7, setValue7] = useState(0)
+        const [value11, setValue11] = useState(0)
+        const [value22, setValue22] = useState(0)
+        const [value33, setValue33] = useState(0)
+        const [value44, setValue44] = useState(0)
+        const [value55, setValue55] = useState(0)
+        const [value66, setValue66] = useState(0)
+        const [value77, setValue77] = useState(0)
+        const userData = JSON.parse(localStorage.getItem('user'))
+        const [timeLeft, setTimeLeft] = useState(10*60)
+        const form = useRef()
 
-    let answers = [
-        value2, value3, value4, value5, value6, value7,
-        value22, value33, value44, value55, value66, value77
-    ]
-    
-    const router = useNavigate()
-  
+        const minutes = getPadTime(Math.floor(timeLeft / 60))
+        const seconds = getPadTime(timeLeft - minutes * 60)
+
+        let answers = [
+            value2, value3, value4, value5, value6, value7,
+            value22, value33, value44, value55, value66, value77
+        ]
+        
+
+        useEffect(() => {
+            if (timeLeft >= 1) {
+                const interval = setTimeout(() => {
+                    setTimeLeft(timeLeft - 1) 
+                }, 1000);
+            } else {
+                handleSubmitOnTime()
+            }
+        });
+
         const handleSubmit = e => {
             e.preventDefault();
   
             console.log(answers)
-            axios.post(`/api/tests/test1/answers/${userData?.id}`, answers)
-             .then((response) => {
-                router(`/tests/`, {replace: true})
-                console.log(response.data)}
+            var userInfo = {
+                userdata: userData,
+                answers: answers
+              }
+            axios.post(`/api/tests/test1/answers/`, userInfo)
+             .then(() => {
+                window.close()
+            }
              )
              .catch(error => {
                 if (error.response) {
@@ -61,13 +66,31 @@ const Test1 = () => {
               });
         };
         
+        const handleSubmitOnTime = () => {
+            console.log(answers)
+            var userInfo = {
+                userdata: userData,
+                answers: answers
+              }
+            axios.post('/api/tests/test1/answers/', userInfo)
+              .then(() => {
+                window.close()
+              })
+              .catch(error => {
+                if (error.response) {
+                  console.log(error.response.data);
+                }
+              });
+        };
+    
+    
 
   return (
     <>
     <div> 
-         <div style={{backgroundColor: '#419D78', color: '#EFD0CA', fontSize: '20px', textAlign: 'center'}}>
-            Осталось времени: <span id="timer"></span>
-        </div> 
+    <div style={{backgroundColor: '#419D78', color: 'white', fontSize: '20px', textAlign: 'center'}}>
+            Осталось времени: {minutes}:{seconds}<span id="timer"></span>
+        </div>
 
     <div className="container">
         <h4 className="text mt-3">
@@ -75,7 +98,7 @@ const Test1 = () => {
         </h4>
     <hr/>
     <div>
-    <form onSubmit={handleSubmit}>
+    <form ref={form} onSubmit={handleSubmit}>
    
     <div className="range">
 
@@ -268,7 +291,9 @@ const Test1 = () => {
     <br />
 
         {/* <input data-testid='save_button' type="submit" className="btn btn-success" value="Сохранить" /> */}
-        <MyButton  data-testid='save_button' onClick={handleSubmit} >Сохранить</MyButton>
+        <center>
+            <MyButton style={{borderRadius: '5px'}} data-testid='save_button' onClick={handleSubmit} >Сохранить</MyButton>
+        </center>
     </form>
 </div>
 </div>

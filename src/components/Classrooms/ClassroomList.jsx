@@ -25,7 +25,7 @@ const ClassroomList = ({classrooms, admin=false}) => {
                     </tr>
                     :
                     <tr>
-                        <th>Название школы</th>
+                        <th>Название класса</th>
                         <th>Посмотреть</th>
                     </tr>
                   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import NotesList from '../components/Notes/NotesList'
+import NotesList from '../../components/Notes/NotesList'
 
 
 const PersonNotes = () => {

@@ -1,17 +1,33 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { getPadTime } from '../../helpers/getPadTime';
+import RadioButton from '../UI/RB/RadioButton';
+import MyButton from '../UI/Button/MyButton';
 
 const Test3 = () => {
     const [questions, setQuestions] = useState([])
     const [answers, setAnswers] = useState([])
-    const router = useNavigate()
-  
+    const [answers2, setAnswers2] = useState([])
+    const [timeLeft, setTimeLeft] = useState(15*60)
+    const userData = JSON.parse(localStorage.getItem('user'))
+
+    const minutes = getPadTime(Math.floor(timeLeft / 60))
+    const seconds = getPadTime(timeLeft - minutes * 60)
+
         useEffect(() => {
             getQuestions()
         }, [])
-        
+
+        useEffect(() => {
+            if (timeLeft >= 1) {
+                const interval = setTimeout(() => {
+                    setTimeLeft(timeLeft - 1) 
+                }, 1000);
+            } else {
+                handleSubmitOnTime()
+            }
+        });
         const getQuestions = async () => {
             const response = await axios.get('/api/tests/test3/')
             setQuestions(response.data)
@@ -19,20 +35,36 @@ const Test3 = () => {
 
         const handleSubmit = e => {
             e.preventDefault();
-            console.log(answers)
-            axios.post('/api/tests/test3/answers/', answers)
-             .then(router(`/tests/`, {replace: true}));
+            var userInfo = {
+                userdata: userData,
+                answers: answers,
+                answers2: answers2
+              }
+            axios.post('/api/tests/test3/answers/', userInfo)
+             .then(() => {
+                window.close()
+            });
         };
 
-
+        const handleSubmitOnTime = () => {
+            var userInfo = {
+                userdata: userData,
+                answers: answers,
+                answers2: answers2
+              }
+            axios.post('/api/tests/test3/answers/', userInfo)
+            .then(() => {
+                window.close()
+            });
+        };
 
 
   return (
     <>
     <div> 
-         <div style={{backgroundColor: '#419D78', color: '#EFD0CA', fontSize: '20px', textAlign: 'center'}}>
-            Осталось времени: <span id="timer"></span>
-        </div> 
+         <div style={{backgroundColor: '#419D78', color: 'white', fontSize: '20px', textAlign: 'center'}}>
+            Осталось времени: {minutes}:{seconds}<span id="timer"></span>
+        </div>
 
     <div className="container">
         <h4 className="text mt-3">Для каждого вопроса выберите:
@@ -50,87 +82,97 @@ const Test3 = () => {
             </tr>
             <tr>
                 <td>
-                    <input type = "radio" className="rb" 
-                    name = {q.question+ "+" }
-                    id="yes" 
-                    value={"+" +  q.id  + "А" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]: "+" +  q.id  + "А" 
-                        }))}
-                    style={{float: 'left'}} required />
-                        <label for="yes" style={{float: 'left', paddingRight: '10px'}}></label>
-                    <input type = "radio" className="rb" 
-                    name = {q.question+ "-" }
-                    id="no" 
-                    value={"-" +  q.id  + "А" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]: "-" +  q.id  + "А" 
-                        }))}
-                    style={{float: 'left'}} required />
-                        <label for="no" style={{float: 'left', paddingRight: '10px'}}></label>
-                        <p style={{float: 'left', clear: 'none', display: 'block',  paddingRight: '10px'}}>A. {q.option1}</p></td>
+                    <div className="float" style={{marginTop: '20px'}}> 
+                        <RadioButton type = "radio" className="radio-input" 
+                        name = {q.question+ "+" }
+                        value={"+" +  q.id  + "А" }
+                        onChange={() => 
+                            setAnswers((answer) => ({
+                                ...answer,
+                                [q.id]: q.id  + "А" 
+                            }))}
+                            required 
+                        color='green'/>
+            
+                        <RadioButton  type = "radio" className="radio-input" 
+                        name = {q.question+ "-" }
+                        value={"-" +  q.id  + "А" }
+                        onChange={() => 
+                            setAnswers2((answer) => ({
+                                ...answer,
+                                [q.id]: q.id  + "А" 
+                            }))}
+                        required 
+                        color='red'/>
+                    </div>
+
+                    <div class="flow-root next-to-float" style={{marginTop: '20px'}}>
+                        <p>A. {q.option1}</p>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input type = "radio" className="rb" 
-                     name = {q.question+ "+" }
-                    id="yes" 
-                    value={"+" +  q.id  + "Б" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]: "+" +  q.id  + "Б" 
-                        }))}
-                    style={{float: 'left'}} />
-                        <label for="yes" style={{float: 'left', paddingRight: '10px'}}></label>
-                    <input type = "radio" className="rb" 
-                     name = {q.question+ "-" } 
-                    id="no" 
-                    value={"-" +  q.id  + "Б" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]: "-" +  q.id  + "Б" 
-                        }))}
-                    style={{float: 'left'}} />
-                        <label for="no" style={{float: 'left', paddingRight: '10px'}}></label>
-                        <p style={{float: 'left', clear: 'none', display: 'block',  paddingRight: '10px'}}>Б. {q.option2}</p></td>
+                    <div className="float">
+                        <RadioButton  type = "radio" className="radio-input" 
+                        name = {q.question+ "+" }
+                        value={"+" +  q.id  + "Б" }
+                        onChange={() => 
+                            setAnswers((answer) => ({
+                                ...answer,
+                                [q.id]:  q.id  + "Б" 
+                            }))} 
+                        color='green'/>
+
+                        <RadioButton type = "radio" className="radio-input"  
+                        name = {q.question+ "-" } 
+                        value={"-" +  q.id  + "Б" }
+                        onChange={() => 
+                            setAnswers2((answer) => ({
+                                ...answer,
+                                [q.id]: q.id  + "Б" 
+                            }))}
+                        color='red'/>
+                    </div>
+                    <div class="flow-root next-to-float"> 
+                        <p>Б. {q.option2}</p>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    <input type = "radio" className="rb" 
-                    name = {q.question+ "+" }
-                    id="yes" 
-                    value={"+" +  q.id  + "В" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]:"+" +  q.id  + "В"
-                        }))}
-                    style={{float: 'left'}}  />
-                        <label for="yes" style={{float: 'left', paddingRight: '10px'}}></label>
-                    <input type = "radio" className="rb" 
-                     name = {q.question+ "-" }
-                    id="no" 
-                    value={"-" +  q.id  + "Б" }
-                    onChange={() => 
-                        setAnswers((answer) => ({
-                            ...answer,
-                            [q.id]: "-" +  q.id  + "Б"
-                        }))}
-                    style={{float: 'left'}} />
-                        <label for="no" style={{float: 'left', paddingRight: '10px'}}></label>
-                        <p style={{float: 'left', clear: 'none', display: 'block',  paddingRight: '10px'}}>В. {q.option3}</p></td>
+                    <div className="float" style={{marginBottom: '20px'}}>
+                        <RadioButton type = "radio" className="radio-input" 
+                        name = {q.question+ "+" }
+                        value={"+" +  q.id  + "В" }
+                        onChange={() => 
+                            setAnswers((answer) => ({
+                                ...answer,
+                                [q.id]: q.id  + "В"
+                            }))}
+                        color='green' />
+                        <RadioButton  type = "radio"   className="radio-input" 
+                        name = {q.question+ "-" }
+                        value={"-" +  q.id  + "Б" }
+                        onChange={() => 
+                            setAnswers2((answer) => ({
+                                ...answer,
+                                [q.id]:  q.id  + "Б"
+                            }))}
+                        color='red'/>
+                    </div>
+                    <div class="flow-root next-to-float" style={{marginBottom: '20px'}}>
+                        <p>В. {q.option3}</p>
+                    </div>
+                </td>
             </tr>
-        </table>
-<hr />
-</div>
+            </table>
+            <hr />
+        </div>
     ))}
-        <input type="submit" className="btn btn-success" value="Сохранить" />
+        <center>
+            <MyButton style={{borderRadius: '5px'}} data-testid='save_button' type='submit' >Сохранить</MyButton>
+        </center>
     </form>
     </div>
 </div>
