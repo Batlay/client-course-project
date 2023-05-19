@@ -9,7 +9,6 @@
       "react-pdf/dist/esm/entry.webpack": "react-pdf"
     }
   },
-  "proxy": "https://newway.herokuapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -65,6 +64,7 @@
   "devDependencies": {
     "@testing-library/dom": "^8.20.0",
     "@testing-library/user-event": "^14.4.3",
+    "http-proxy-middleware": "^2.0.6",
     "jest": "^29.0.0",
     "ts-jest": "^29.0.5"
   }
