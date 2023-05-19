@@ -24,7 +24,7 @@ const NoteForm = ({create}) => {
 
     return (
         <>
-        <form style={{bottom: '5%', width: '100%'}}> 
+        <form onSubmit={addNewNote} style={{bottom: '5%', width: '100%'}}> 
         <center>
         <h5>Написать заметку</h5>
         <br/>
@@ -36,27 +36,17 @@ const NoteForm = ({create}) => {
                 type='text' 
                 placeholder='Заголовок'
                 style={{width: '90%'}}  />
-        {/* <MyInput 
-            value={note.content}
-            onChange={e => setNote({...note, content: e.target.value})}
-            type='text' 
-            placeholder='Содержание'
-            style={{height: '200px'}}/> */}
             <textarea 
+            required
             type='text'
             className="form-control" 
             value={note.content}
             onChange={e => setNote({...note, content: e.target.value})}
             style={{height: '200px', width: '90%', marginTop: '10px'}}
-            placeholder='Содержание'
-/>
-        {/* <MyInput 
-            value={note.slug}
-            onChange={e => setNote({...note, slug: e.target.value})}
-            type='text' 
-            placeholder='Путь'/> */}
+            placeholder='Содержание'/>
 
-            <MyButton style={{borderRadius: '5px', width: '30%'}} onClick={addNewNote}>Отправить классному руководителю</MyButton>
+
+            <MyButton style={{borderRadius: '5px', width: '30%'}} type='submit'>Отправить классному руководителю</MyButton>
         </center>
     </form>
     </>

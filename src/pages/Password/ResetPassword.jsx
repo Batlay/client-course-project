@@ -54,46 +54,40 @@ const ResetPassword = () => {
                         <form  onSubmit={submitForm}>
                             <div className="mb-3">
                                 <p>Введите адрес электронной почты и вам будет отправлено письмо с инструкцией по сбросу пароля</p>
-                                  <label htmlFor='exampleInputEmail' className='form-label'>Email</label>
-                                  
-                                  <input
+                                <label htmlFor='exampleInputEmail' className='form-label'>Email</label>                   
+                                <input
                                   required
                                   disabled={disabled} 
                                   type="email" 
                                   value={data.email}
                                   name='email'
                                   onChange={handleChange}
-                                  className='form-control'
-                                  />
+                                  className='form-control'/>
                             </div>
                             <center>
-                            <MyButton
-                              disabled={disabled}
-                              style={{borderRadius: '5px'}}
-                              type='submit'
-                              >Отправить
-                            </MyButton>
-                            
+                                <MyButton
+                                  disabled={disabled}
+                                  style={{borderRadius: '5px'}}
+                                  type='submit'
+                                  >Отправить
+                                </MyButton>               
                             </center>
-                            </form>
+                        </form>
                         </div>
                   </div>
-
               </div>
           </div> 
           <ToastContainer
-    position="bottom-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="light"
-/> 
-
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"/> 
       </div>
     )
 }

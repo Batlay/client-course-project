@@ -13,24 +13,32 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Pupils = () => {
         const [pupils, setPupils] = useState([])
+        const [results, setResults] = useState([])
         const [modal, setModal] = useState(false)
         const userData = JSON.parse(localStorage.getItem('user'))
-
+     
         useEffect(() => {
             getPupils()
+            getFormResults()
         }, [])
         
         const getPupils = async () => {
             const response = await axios.post('/api/pupils/', userData)
             setPupils(response.data)
-            console.log(response.data)
         } 
 
+        const getFormResults = async () => {
+            const response = await axios.post('/api/pupils/form/results/', userData)
+            setResults(response.data)
+        }
+
+
         const addPupil = (newPupil) => {
-            var userInfo = {
+            var userInfo = 
+            {
                 userdata: userData,
                 newPupil: newPupil
-              }
+            }
             axios.post('/api/pupils/create/', userInfo)
              .then(response =>  {
                 setPupils([...pupils, response.data])
@@ -39,43 +47,43 @@ const Pupils = () => {
              })
              .catch((error) => {
                 if (error.response) {
-                    console.log(error.response.data[0]);
                     toast.error(error.response.data[0])
                   }
                 else {
                     toast.error('Возникла ошибка')
                 }  
              })
-      }
+        } 
 
- 
 
     return (
         <Container>
-        <Row>
-        <MyModal visible={modal} setVisible={setModal}>
-            <PupilForm create={addPupil} />
-        </MyModal>
-            <Col md={8} mt={3}>
-            <MyButton data-testid='1' name='add' style={{marginTop: '20px', width: '25%', borderRadius: '5px' }} onClick={() => setModal(true)}>
-            Добавить нового ученика
-        </MyButton>
-                <PupilList  pupils={pupils}/></Col>
-            <Col>{pupils.classroom}</Col>
-        </Row>
-        <ToastContainer
-    position="bottom-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="light"
-/>
-    </Container>
+            <Row>
+                <MyModal visible={modal} setVisible={setModal}>
+                    <PupilForm create={addPupil} />
+                </MyModal>
+                <Col md={8} mt={3}>
+                    <MyButton data-testid='1' name='add' style={{marginTop: '20px', width: '25%', borderRadius: '5px' }} onClick={() => setModal(true)}>
+                        Добавить нового ученика
+                    </MyButton>
+                    <PupilList  pupils={pupils} results={results}/>
+                </Col>
+                <Col>
+                    {pupils.classroom}
+                </Col>
+            </Row>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"/>
+        </Container>
     )
 }
 

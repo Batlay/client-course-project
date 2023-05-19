@@ -1,11 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Card, Button, CardImg } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import MyButton from '../Button/MyButton'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
-const PupilCard = (props) => {
+const PupilCard = (props, key) => {
     let {imgSrc, title, id} = props.data
     const router = useNavigate()
     return (
@@ -16,10 +15,8 @@ const PupilCard = (props) => {
             <Card.Body className='text-center'>
                 <Card.Title style={{fontSize: 16, height: 50}}>{title}</Card.Title>
             </Card.Body>
-            {/* <Button className='w-100 rounded-0' variant='success'>Посмотреть</Button> */}
-            {/* <Link to={`/notes/person/${id}`}>Подробнее</Link> */}
             <div className=" row justify-content-center  my-auto">
-            <MyButton style={{width: '70%', borderRadius: '5px', borderColor: 'black', color: 'black'}} onClick={() => router(`/notes/person/${id}`, {replace: true})}>Подробнее</MyButton>
+                <MyButton style={{width: '70%', borderRadius: '5px', borderColor: 'black', color: 'black'}} onClick={() => router(`/notes/person/${id}`, {replace: true})}>Подробнее</MyButton>
            </div>
        </Card>
     )

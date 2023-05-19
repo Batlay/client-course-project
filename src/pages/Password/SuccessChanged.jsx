@@ -17,8 +17,9 @@ const SuccessChanged = () => {
                             </div>
                             <center>
                             <MyButton
-                              style={{borderRadius: '5px', width: '50%'}}
-                            onClick={() => router('/login', {replace: true})}>
+                                style={{borderRadius: '5px', width: '50%'}}
+                                onClick={() => router('/login', {replace: true})}
+                            >
                                 Вернуться на страницу авторизации
                             </MyButton>             
                             </center>

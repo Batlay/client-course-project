@@ -7,7 +7,6 @@ import axios from 'axios'
 import SchoolList from '../../components/Schools/SchoolList';
 
 const Schools = () => {
-
         const [schools, setSchools] = useState([])
         
         useEffect(() => {
@@ -19,14 +18,12 @@ const Schools = () => {
             setSchools(response.data)         
         }
 
-
-
     return (
-        <Container>
+    <Container>
         <Row>
             <Col md={7} mt={3}>
-                <SchoolList schools={schools} /></Col>
-            <Col></Col>
+                <SchoolList schools={schools} />
+            </Col>
         </Row>
     </Container>
     )

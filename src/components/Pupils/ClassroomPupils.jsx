@@ -9,26 +9,24 @@ import PupilList from './PupilList';
 
 const ClassroomPupils = () => {
 
-        const params = useParams()
-        const [pupils, setPupils] = useState([])
-        
-        useEffect(() => {
-            getPupils()
-        }, [])
-        
-        const getPupils = async () => {
-            const response = await axios.get(`/api/classrooms/${params.id}`)
-            setPupils(response.data)
-        }
-
-
+    const params = useParams()
+    const [pupils, setPupils] = useState([])
+    
+    useEffect(() => {
+        getPupils()
+    }, [])
+    
+    const getPupils = async () => {
+        const response = await axios.get(`/api/classrooms/${params.id}`)
+        setPupils(response.data)
+    }
 
     return (
-        <Container>
+    <Container>
         <Row>
             <Col md={7} mt={3}>
-                <PupilList pupils={pupils} spec={true} /></Col>
-            <Col></Col>
+                <PupilList pupils={pupils} spec={true} />
+            </Col>
         </Row>
     </Container>
     )

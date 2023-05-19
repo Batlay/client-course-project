@@ -11,15 +11,14 @@ const PersonNotes = () => {
 
   useEffect(() => {
     getNotes()
-}, [])
+  }, [])
 
 const getNotes = async () => {
     const response = await axios.get(`/api/notes/person/${params.id}`)
     setNotes(response.data)
 }
 
-
-  return (
+return (
     <div style={{width: 800,   display: 'flex', flexDirection: 'column',
       alignItems: 'center' }}>
          <NotesList notes={notes} />

@@ -31,28 +31,28 @@ const ChangePassword = () => {
               setSuccess('')
               setError('Введите корректный пароль')
             }  else {
-                  formData.append('password', data.password)
-                  try {
-                    axios.post(`/api/user-change-password/${id}`, formData 
-                    )
-                    .then((res) => {
-                        if (res.data.bool === true){
-                            setSuccess(res.data.msg)
-                            setError('')
-                            setData({
-                              password: '',
-                              password1: ''
-                            })
-                            setDisabled(true)
-                            navigate("/success-change-password");
-                        } else {
-                          setSuccess('')
-                          setError(res.data.msg)
-                        }
-                    })
-                  } catch(error) {
-                      console.log(error)
-                  }
+                formData.append('password', data.password)
+                try {
+                  axios.post(`/api/user-change-password/${id}`, formData 
+                  )
+                  .then((res) => {
+                      if (res.data.bool === true){
+                          setSuccess(res.data.msg)
+                          setError('')
+                          setData({
+                            password: '',
+                            password1: ''
+                          })
+                          setDisabled(true)
+                          navigate("/success-change-password");
+                      } else {
+                        setSuccess('')
+                        setError(res.data.msg)
+                      }
+                  })
+                } catch(error) {
+                    console.log(error)
+                }
                 }
         } else {
           setSuccess('')
@@ -61,8 +61,8 @@ const ChangePassword = () => {
     }
 
     function isValidPassword(password) {
-      return  strongRegex.test(password);
-  }
+        return  strongRegex.test(password);
+    }
 
     return (
       <div className='container mt-4'>
@@ -76,7 +76,6 @@ const ChangePassword = () => {
                             <form  onSubmit={submitForm}>
                                 <div className="mb-3">
                                     <label htmlFor='exampleInputEmail' className='form-label'>Пожалуйта, дважды введите новый пароль для подтверждения. <br/> 
-                      
                                     </label>
                                     <input 
                                     required

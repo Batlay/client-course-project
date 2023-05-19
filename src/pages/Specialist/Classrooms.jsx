@@ -8,27 +8,24 @@ import ClassroomList from '../../components/Classrooms/ClassroomList';
 import { useParams } from 'react-router-dom';
 
 const Classrooms = () => {
-
-        const params = useParams()
-        const [classrooms, setClassrooms] = useState([])
-        
-        useEffect(() => {
-            getClassrooms()
-        }, [])
-        
-        const getClassrooms = async () => {
-            const response = await axios.get(`/api/schools/${params.id}`)
-            setClassrooms(response.data)
-        }
-
-
+    const params = useParams()
+    const [classrooms, setClassrooms] = useState([])
+    
+    useEffect(() => {
+        getClassrooms()
+    }, [])
+    
+    const getClassrooms = async () => {
+        const response = await axios.get(`/api/schools/${params.id}`)
+        setClassrooms(response.data)
+    }
 
     return (
-        <Container>
+    <Container>
         <Row>
             <Col md={7} mt={3}>
-                <ClassroomList classrooms={classrooms} /></Col>
-            <Col></Col>
+                <ClassroomList classrooms={classrooms} />
+            </Col>
         </Row>
     </Container>
     )

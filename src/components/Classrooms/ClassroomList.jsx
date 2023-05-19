@@ -1,13 +1,13 @@
 import React from 'react'
 import ClassroomItem from './ClassroomItem'
 
-const ClassroomList = ({classrooms, admin=false}) => {
+const ClassroomList = ({classrooms}) => {
 
     if (!classrooms.length) {
       return (
         <h1 style={{textAlign: 'center'}}>
-              Список классов пуст. 
-            </h1>
+            Список классов пуст. 
+        </h1>
       )
     }
 
@@ -15,25 +15,16 @@ const ClassroomList = ({classrooms, admin=false}) => {
     return (
       <div>
            <table className="table table-hover">
-                <thead className="thead-dark">
-                { admin ?
+                <thead className="thead-dark">        
                     <tr>
                         <th>Название класса</th>
                         <th>Посмотреть</th>
-                        <th>Изменить</th>
-                        <th>Удалить</th>
-                    </tr>
-                    :
-                    <tr>
-                        <th>Название класса</th>
-                        <th>Посмотреть</th>
-                    </tr>
-                  }
+                    </tr>           
                 </thead>
-          {classrooms.map((classroom, index) => (
-                <ClassroomItem classroom={classroom} admin={admin}/>
-            ))}
-                </table>
+              {classrooms.map((classroom, index) => (
+                  <ClassroomItem classroom={classroom} key={index} />
+              ))}
+          </table>
       </div>
     )
   }

@@ -17,20 +17,11 @@ import Schools from "../pages/Specialist/Schools";
 import Classrooms from "../pages/Specialist/Classrooms";
 import ClassroomPupils from "../components/Pupils/ClassroomPupils";
 import Specialist from "../pages/Specialist/Specialist";
-import EditSchools from "../pages/Admin/EditSchools";
-import EditPupils from "../pages/Admin/EditPupils";
-import EditClassrooms from "../pages/Admin/EditClassrooms";
 import Contacts from "../pages/Contacts";
 import Main from "../pages/Main";
 import Form from "../pages/Teacher/Form";
 import SuccessChanged from "../pages/Password/SuccessChanged";
 
-export const adminRoutes = [
-    {path: '/contacts', component: <Contacts />, exact: true},
-    {path: '/administator/schools', component: <EditSchools />, exact: true},
-    {path: '/administrator/schools/:id', component: <EditClassrooms />, exact: true},
-    {path: '/administrator/classrooms/:id', component: <EditPupils />, exact: true},
-]
 
 export const teacherRoutes = [
     {path: '/contacts', component: <Contacts />, exact: true},

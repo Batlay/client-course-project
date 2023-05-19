@@ -4,7 +4,7 @@ import MyButton from '../UI/Button/MyButton'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
-const PupilForm = ({create, visible}) => {
+const PupilForm = ({create}) => {
     const [pupil, setPupil] = useState(
         {
             fio: '', 
@@ -93,7 +93,7 @@ const PupilForm = ({create, visible}) => {
                 style={{margin: '10px',width: '60%'}}  
                 value={pupil.email}
                 onChange={e => setPupil({...pupil, email: e.target.value})} />
-            <label for="avatar">Выберите фото профиля ученика (необязательно)</label>
+            <label>Выберите фото профиля ученика (необязательно)</label>
             <br/>
             <input
                 // onChange={e => setPupil({...pupil, profile_pic: e.target.value})}

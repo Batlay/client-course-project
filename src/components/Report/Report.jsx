@@ -4,8 +4,7 @@ import MyButton from '../UI/Button/MyButton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-// import 'react-pdf/dist/esm/Page/TextLayer.css';
-
+import "react-pdf/dist/esm/Page/TextLayer.css";
 
 const Report = () => {
 	
@@ -13,7 +12,7 @@ const Report = () => {
 	const [numPages, setNumPages] = useState(null);
 	const [pageNumber, setPageNumber] = useState(1);
 	const [pdf, setPdf] = useState('')
-	const [load, setLoad] = useState(false)
+	const [pupil, setPupil] = useState({})
 
 	const onDocumentLoadSuccess = ({ numPages }) => {
 		setNumPages(numPages);
@@ -31,9 +30,15 @@ const Report = () => {
 
 	useEffect(() => {
 		getPdf()
+		getPupil()
 	}, [])
 
-	const getPdf = async() => {
+	const getPupil = async () => {
+        const response = await axios.get(`/api/pupils/${params.id}`)
+        setPupil(response.data)
+    }
+
+	const getPdf = async () => {
 		await axios.get(`/api/pupils/report/${params.id}`, {responseType: 'arraybuffer'})
 		.then((response) => {
 			setPdf(response.data)
@@ -51,40 +56,34 @@ const Report = () => {
 		const url = window.URL.createObjectURL(new Blob([new Uint8Array(pdf).buffer])); 
 		const link = document.createElement('a'); 
 		link.href = url; 
-		link.setAttribute('download', 'yourcoolpdf.pdf'); 
+		link.setAttribute('download', pupil.fio+'.pdf'); 
 		document.body.appendChild(link); 
 		link.click();
     }
 
 	return (
-		<div className='App'>
-			<nav>
-				<MyButton onClick={goToPrevPage}>Назад</MyButton>
-				<MyButton onClick={goToNextPage}>Далее</MyButton>
-				<p>
-					Page {pageNumber} of {numPages}
-				</p>
-				<button onClick={onButtonClick} >
-                    Скачать PDF файл
+		<div className='report'>
+			<div className="pdf">
+				<button style={{float:'right'}} onClick={onButtonClick} >
+					<span>Скачать</span><span>PDF</span>
                 </button>
-			</nav>
-            {/* <MyDocument
-				onLoadSuccess={onDocumentLoadSuccess}
-			>
-				<Page pageNumber={pageNumber} />
-			</MyDocument> */}
-			
-			<Document
-				file={pdf}
-				onLoadSuccess={onDocumentLoadSuccess}
-			>
-				<Page pageNumber={pageNumber} />
-			</Document>
-			
-			
-            {/* <MyDocument>
-				<Page pageNumber={pageNumber} />
-                </MyDocument> */}
+			</div>	
+			<center>
+				<nav>
+					<p>
+						Страница {pageNumber} из {numPages}
+					</p>
+					<MyButton style={{borderRadius: '5px', width: '8%'}} onClick={goToPrevPage}>Назад</MyButton>
+					<MyButton style={{borderRadius: '5px', width: '8%'}} onClick={goToNextPage}>Далее</MyButton>
+					<br/>
+				</nav>
+				<Document style={{border:'10px solid black'}}
+					file={pdf}
+					onLoadSuccess={onDocumentLoadSuccess}
+				>
+					<Page style={{border:'10px solid black'}} pageNumber={pageNumber} />
+				</Document>
+			</center>
 		</div>
 	);
 };
