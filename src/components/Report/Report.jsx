@@ -1,10 +1,14 @@
 import { useState, useEffect} from 'react';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack';
 import MyButton from '../UI/Button/MyButton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import "react-pdf/dist/esm/Page/TextLayer.css";
+
+
+const url = `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
+pdfjs.GlobalWorkerOptions.workerSrc = url
 
 const Report = () => {
 	const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
@@ -80,6 +84,7 @@ const Report = () => {
 				<Document style={{border:'10px solid black'}}
 					file={pdf}
 					onLoadSuccess={onDocumentLoadSuccess}
+					onLoadError={console.error}
 				>
 					<Page style={{border:'10px solid black'}} pageNumber={pageNumber} />
 				</Document>

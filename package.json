@@ -24,6 +24,7 @@
     "emailjs": "^4.0.1",
     "enzyme": "^3.11.0",
     "identity-obj-proxy": "^3.0.0",
+    "pdfjs": "^2.4.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-confirm-alert": "^3.0.6",
