@@ -10,13 +10,14 @@ import { useParams } from 'react-router-dom';
 const Classrooms = () => {
     const params = useParams()
     const [classrooms, setClassrooms] = useState([])
-    
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
+
     useEffect(() => {
         getClassrooms()
     }, [])
     
     const getClassrooms = async () => {
-        const response = await axios.get(`/api/schools/${params.id}`)
+        const response = await axios.get(`${rootUrl}/api/schools/${params.id}`)
         setClassrooms(response.data)
     }
 

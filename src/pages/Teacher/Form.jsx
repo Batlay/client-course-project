@@ -9,10 +9,11 @@ const Form = () => {
     const params = useParams()
     const [answers, setAnswers] = useState([])
     const router = useNavigate()
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post(`/api/pupils/form/${params.id}`, answers)
+        axios.post(`${rootUrl}/api/pupils/form/${params.id}`, answers)
           .then(() => {
               toast.success('Форма успешно заполнена')
               router(`/pupils/`, {replace: true})}

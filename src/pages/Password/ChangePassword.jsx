@@ -9,7 +9,7 @@ const ChangePassword = () => {
       password: '',
       password1: ''
     })
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
@@ -33,7 +33,7 @@ const ChangePassword = () => {
             }  else {
                 formData.append('password', data.password)
                 try {
-                  axios.post(`/api/user-change-password/${id}`, formData 
+                  axios.post(`${rootUrl}/api/user-change-password/${id}`, formData 
                   )
                   .then((res) => {
                       if (res.data.bool === true){

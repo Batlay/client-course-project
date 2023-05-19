@@ -12,21 +12,22 @@ const PupilPage = () => {
     const [pupil, setPupil] = useState({})
     const [overall, setOverall] = useState({})
     const [result, setResult] = useState([])
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
     const [getPupil, isLoading] = useFetching(async (id) => {
-        const response = await axios.get(`/api/pupils/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/${id}`)
         setPupil(response.data)
     })
 
 
     const [getOverall, isLoading2] = useFetching(async (id) => {
-        const response = await axios.get(`/api/pupils/overall/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/overall/${id}`)
         setOverall(response.data)
     })
 
 
     const getResult = async (id) => {
-        const response = await axios.get(`/api/pupils/result/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/result/${id}`)
         setResult(response.data)     
     }
 
@@ -48,7 +49,7 @@ const PupilPage = () => {
                 <h3>
                     {pupil.fio}
                 </h3>
-                { pupil.profile_pic && <img src={`https://newway.herokuapp.com/static${pupil.profile_pic}`} alt=''/> }
+                { pupil.profile_pic && <img src={`${rootUrl}/static${pupil.profile_pic}`} alt=''/> }
             </div> 
 
             <div className="item item_2"> 
@@ -73,7 +74,7 @@ const PupilPage = () => {
                 { !isLoading2 && <img src={`data:image/jpeg;base64,${overall}`} alt=''/> }
             </div>
 
-            <div className="item item_4" style={{ backgroundImage:`url("https://newway.herokuapp.com/static/images/notes.jpg")` }}>
+            <div className="item item_4" style={{ backgroundImage:`url("${rootUrl}/static/images/notes.jpg")` }}>
                 <div className="row h-100 ">
                     <div className=" row justify-content-center  my-auto">
                         <MyButton style={{width:'50%', borderRadius: '5px'}} onClick={() => router(`/notes/person/${params.id}`, {replace: true})}>

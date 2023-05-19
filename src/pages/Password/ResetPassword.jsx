@@ -10,7 +10,7 @@ const ResetPassword = () => {
     const [data, setData] = useState({
       email: '',
     })
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
     const [disabled, setDisabled] = useState(false)
@@ -27,7 +27,7 @@ const ResetPassword = () => {
         const formData = new FormData()
         formData.append('email', data.email)
         try {
-          axios.post('/api/user-forgot-password/', formData)
+          axios.post(`${rootUrl}/api/user-forgot-password/`, formData)
           .then((res) => {
               if (res.data.bool === true){
                 setDisabled(true)

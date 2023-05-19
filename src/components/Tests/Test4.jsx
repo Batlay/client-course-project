@@ -11,7 +11,8 @@ const Test4 = () => {
     const [timeLeft, setTimeLeft] = useState(15*60)
     const form = useRef()
     const userData = JSON.parse(localStorage.getItem('user'))
-    
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
+
     const minutes = getPadTime(Math.floor(timeLeft / 60))
     const seconds = getPadTime(timeLeft - minutes * 60)
     
@@ -31,7 +32,7 @@ const Test4 = () => {
 
         
     const getQuestions = async () => {
-        const response = await axios.get('/api/tests/test4/')
+        const response = await axios.get(`${rootUrl}/api/tests/test4/`)
         setQuestions(response.data)
     }
 
@@ -42,7 +43,7 @@ const Test4 = () => {
             answers: answers
             }
         console.log(answers)
-        axios.post('/api/tests/test4/answers/', userInfo)
+        axios.post(`${rootUrl}/api/tests/test4/answers/`, userInfo)
             .then(() => {
             window.close()
         });
@@ -54,7 +55,7 @@ const Test4 = () => {
             userdata: userData,
             answers: answers
             }
-        axios.post('/api/tests/test4/answers/', userInfo)
+        axios.post(`${rootUrl}/api/tests/test4/answers/`, userInfo)
             .then(() => {
             window.close()
         });

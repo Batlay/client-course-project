@@ -5,7 +5,7 @@ import MyButton from '../UI/Button/MyButton';
 import { getPadTime } from '../../helpers/getPadTime';
 
 const Test1 = () => {
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     const [value1, setValue1] = useState(0)
     const [value2, setValue2] = useState(0)
     const [value3, setValue3] = useState(0)
@@ -50,7 +50,7 @@ const Test1 = () => {
             userdata: userData,
             answers: answers
             }
-        axios.post(`/api/tests/test1/answers/`, userInfo)
+        axios.post(`${rootUrl}/api/tests/test1/answers/`, userInfo)
             .then(() => {
             window.close()
             })
@@ -66,7 +66,7 @@ const Test1 = () => {
             userdata: userData,
             answers: answers
             }
-        axios.post('/api/tests/test1/answers/', userInfo)
+        axios.post(`${rootUrl}/api/tests/test1/answers/`, userInfo)
             .then(() => {
             window.close()
             })

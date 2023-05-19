@@ -12,6 +12,7 @@ const PupilForm = ({create}) => {
             email: '', 
             profile_pic: '',
         })
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
     const addNewPupil = (e) => {
         e.preventDefault()
@@ -66,7 +67,7 @@ const PupilForm = ({create}) => {
         <form onSubmit={addNewPupil} style={{ 
             height: '50vh',
             width: '50vw',
-            backgroundImage: 'url("https://newway.herokuapp.com/static/images/flower.jpg")', backgroundSize:'cover' }}>
+            backgroundImage: `url("${rootUrl}/static/images/flower.jpg")`, backgroundSize:'cover' }}>
         <center>
         <br/>
             <input 

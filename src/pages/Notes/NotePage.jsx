@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const NotePage = () => {
-
     const params = useParams()
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     const [note, setNote] = useState(null)
 
     useEffect(() => {
@@ -13,7 +12,7 @@ const NotePage = () => {
     }, [])
 
     const getNote = async () => {
-      const response = await axios.get(`/api/notes/${params.id}`)
+      const response = await axios.get(`${rootUrl}/api/notes/${params.id}`)
       setNote(response.data)
     }
 
@@ -21,7 +20,7 @@ const NotePage = () => {
       <div className='note'>
         <div className="card">
           <div className="card__header">
-              <img src="https://newway.herokuapp.com/static/images/note_header.jpg" style={{backgroundSize: 'auto'}} alt="card__image" className="card__image" width="600" />
+              <img src={`${rootUrl}/static/images/note_header.jpg`} style={{backgroundSize: 'auto'}} alt="card__image" className="card__image" width="600" />
           </div>
           <div className="card__body">
               <span>{note?.pupil}</span>

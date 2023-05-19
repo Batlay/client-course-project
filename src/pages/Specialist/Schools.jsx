@@ -8,13 +8,14 @@ import SchoolList from '../../components/Schools/SchoolList';
 
 const Schools = () => {
         const [schools, setSchools] = useState([])
-        
+        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
+
         useEffect(() => {
             getSchools()
         }, [])
         
         const getSchools = async () => {
-            const response = await axios.get('/api/schools/')
+            const response = await axios.get(`${rootUrl}/api/schools/`)
             setSchools(response.data)         
         }
 

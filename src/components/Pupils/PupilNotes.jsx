@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import PupilCard from '../UI/Card/PupilCard'
 
 const PupilNotes = ({pupils}) => {
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     if (!pupils.length) {
         return (
         <h1 style={{textAlign: 'center'}}>
@@ -19,7 +19,7 @@ const PupilNotes = ({pupils}) => {
     return (
     <div className='container py-4 px-4 justify-content-center w-100 ' 
         style={{ boxShadow: '-8px -3px 8px 0px rgba(34, 60, 80, 0.2)', 
-        backgroundImage: `url("https://newway.herokuapp.com/static/images/note_pupil_form.jpg")` , 
+        backgroundImage: `url("${rootUrl}/static/images/note_pupil_form.jpg")` , 
         backgroundSize: 'cover'}}>
         <Swiper
             freeMode={true}
@@ -51,7 +51,7 @@ const PupilNotes = ({pupils}) => {
         >
             {pupils.map((pupil, index) => (
             <SwiperSlide key={index}>
-                <PupilCard key={index} data={{imgSrc: `https://newway.herokuapp.com/static${pupil.profile_pic}`, title: pupil.fio, id: pupil.id}}/>
+                <PupilCard key={index} data={{imgSrc: `${rootUrl}/static${pupil.profile_pic}`, title: pupil.fio, id: pupil.id}}/>
             </SwiperSlide>
             ))}
         </Swiper>

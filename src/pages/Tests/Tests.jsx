@@ -11,19 +11,20 @@ const Tests = () => {
         const [tests, setTests] = useState([])
         const [results, setResults] = useState([])
         const userData = JSON.parse(localStorage.getItem('user'))
-        
+        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
+
         useEffect(() => {
             getTests()
             getResults()
         }, [])
         
         const getTests = async () => {
-            const response = await axios.post('/api/tests/', userData )
+            const response = await axios.post(`${rootUrl}/api/tests/`, userData )
             setTests(response.data)
         }
 
         const getResults = async () => {
-            const response = await axios.post('/api/tests/results/', userData )
+            const response = await axios.post(`${rootUrl}/api/tests/results/`, userData )
             setResults(response.data)
         }
 

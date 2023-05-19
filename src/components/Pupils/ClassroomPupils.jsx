@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import PupilList from './PupilList';
 
 const ClassroomPupils = () => {
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     const params = useParams()
     const [pupils, setPupils] = useState([])
     
@@ -17,7 +17,7 @@ const ClassroomPupils = () => {
     }, [])
     
     const getPupils = async () => {
-        const response = await axios.get(`/api/classrooms/${params.id}`)
+        const response = await axios.get(`${rootUrl}/api/classrooms/${params.id}`)
         setPupils(response.data)
     }
 

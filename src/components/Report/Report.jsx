@@ -7,7 +7,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 const Report = () => {
-	
+	const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 	const params = useParams()
 	const [numPages, setNumPages] = useState(null);
 	const [pageNumber, setPageNumber] = useState(1);
@@ -34,12 +34,12 @@ const Report = () => {
 	}, [])
 
 	const getPupil = async () => {
-        const response = await axios.get(`/api/pupils/${params.id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/${params.id}`)
         setPupil(response.data)
     }
 
 	const getPdf = async () => {
-		await axios.get(`/api/pupils/report/${params.id}`, {responseType: 'arraybuffer'})
+		await axios.get(`${rootUrl}/api/pupils/report/${params.id}`, {responseType: 'arraybuffer'})
 		.then((response) => {
 			setPdf(response.data)
 		})    

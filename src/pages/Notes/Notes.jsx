@@ -15,6 +15,7 @@ const Notes = () => {
         const [pupils, setPupils] = useState([])
         const [modal, setModal] = useState(false)
         const userData = JSON.parse(localStorage.getItem('user'))
+        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
         useEffect(() => {
             getNotes()
@@ -22,17 +23,17 @@ const Notes = () => {
         }, [])
         
         const getNotes = async () => {
-            const response = await axios.post('/api/notes/', userData )
+            const response = await axios.post(`${rootUrl}/api/notes/`, userData )
             setNotes(response.data)
         }
 
         const getPupils = async () => {
-            const response = await axios.post('/api/pupils/', userData )
+            const response = await axios.post(`${rootUrl}/api/pupils/`, userData )
             setPupils(response.data)
         }
 
         const createNote = (newNote) => {
-            axios.post('/api/notes/create/', newNote)
+            axios.post(`${rootUrl}/api/notes/create/`, newNote)
              .then(response =>  {
                 setNotes([...notes, response.data])
                 setModal(false)

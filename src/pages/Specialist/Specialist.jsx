@@ -15,26 +15,27 @@ const Specialist = () => {
     const [overall, setOverall] = useState({})
     const [result, setResult] = useState([])
     const [chart, setChart] = useState([])
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
     const [getPupil, isLoading, error] = useFetching(async (id) => {
-        const response = await axios.get(`/api/pupils/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/${id}`)
         setPupil(response.data)
     })
 
     const [getOverall, isLoading2, error2] = useFetching(async (id) => {
-        const response = await axios.get(`/api/pupils/overall/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/overall/${id}`)
         setOverall(response.data)
     })
 
     const getResult = async (id) => {
-        const response = await axios.get(`/api/pupils/result/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/result/${id}`)
         .then((response) => {
             setResult(response.data)
         })      
     }
 
     const getChart = async (id) => {
-        const response = await axios.get(`/api/pupils/chart/${id}`)
+        const response = await axios.get(`${rootUrl}/api/pupils/chart/${id}`)
         .then((response) => {
             setChart(response.data)
         })      
@@ -49,7 +50,7 @@ const Specialist = () => {
 
     
     const addNote = (newNote) => {
-        axios.post(`/api/notes/create/${params.id}`, newNote)
+        axios.post(`${rootUrl}/api/notes/create/${params.id}`, newNote)
          .then(response =>  {
             toast.success('Заметка успешно отправлена')
          })
@@ -72,7 +73,7 @@ const Specialist = () => {
                 <h3>
                     {pupil.fio}
                 </h3>
-                { pupil.profile_pic && <img src={`http://localhost:8000/static${pupil.profile_pic}`} alt=''/> }
+                { pupil.profile_pic && <img src={`${rootUrl}/static${pupil.profile_pic}`} alt=''/> }
                 <img src={`data:image/jpeg;base64,${chart}`} alt=''/>
             </div>
         

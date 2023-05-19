@@ -8,13 +8,14 @@ import NotesList from '../../components/Notes/NotesList'
 const PersonNotes = () => {
   const params = useParams()
   const [notes, setNotes] = useState([])
+  const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
   useEffect(() => {
     getNotes()
   }, [])
 
 const getNotes = async () => {
-    const response = await axios.get(`/api/notes/person/${params.id}`)
+    const response = await axios.get(`${rootUrl}/api/notes/person/${params.id}`)
     setNotes(response.data)
 }
 
