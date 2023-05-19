@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyButton from '../UI/Button/MyButton';
 import { useNavigate } from 'react-router-dom';

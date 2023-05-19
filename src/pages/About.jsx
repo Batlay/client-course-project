@@ -1,12 +1,13 @@
 import React from 'react';
 
 const About = () => {
-
+    const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
     return (
+        
         <div className='about_page'>
             <h2>Программное средство предназначено помочь учреждениям общего среднего образования в диагностике творчекого потенциала учеников. </h2>
             <div className="image" style={{margin: '50px'}}> 
-                <img src='https://newway.herokuapp.com/static/images/logo.png'/>
+                <img src={`${rootUrl}/static/images/logo.png`}/>
             </div>
             <p>
             &emsp;&emsp;&emsp;Оцениваются следующие критерии: <br/> 

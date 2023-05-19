@@ -16,19 +16,20 @@ const Pupils = () => {
         const [results, setResults] = useState([])
         const [modal, setModal] = useState(false)
         const userData = JSON.parse(localStorage.getItem('user'))
-     
+        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
+
         useEffect(() => {
             getPupils()
             getFormResults()
         }, [])
         
         const getPupils = async () => {
-            const response = await axios.post('/api/pupils/', userData)
+            const response = await axios.post(`${rootUrl}/api/pupils/`, userData)
             setPupils(response.data)
         } 
 
         const getFormResults = async () => {
-            const response = await axios.post('/api/pupils/form/results/', userData)
+            const response = await axios.post(`${rootUrl}/api/pupils/form/results/`, userData)
             setResults(response.data)
         }
 
@@ -39,7 +40,7 @@ const Pupils = () => {
                 userdata: userData,
                 newPupil: newPupil
             }
-            axios.post('/api/pupils/create/', userInfo)
+            axios.post(`${rootUrl}/api/pupils/create/`, userInfo)
              .then(response =>  {
                 setPupils([...pupils, response.data])
                 setModal(false)
@@ -53,7 +54,7 @@ const Pupils = () => {
                     toast.error('Возникла ошибка')
                 }  
              })
-        } 
+        }
 
 
     return (

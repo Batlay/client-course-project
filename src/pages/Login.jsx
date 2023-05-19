@@ -12,15 +12,15 @@ const Login = () => {
   const [user, setUser] = useState({username: '', password: ''})
   const {isAuth, setIsAuth} = useContext(AuthContext)
   const {value, setValue} = useContext(UserContext)
-
+  const rootUrl = process.env.NODE_ENV === 'production' ? 'https://newway.herokuapp.com' : 'http://127.0.0.1:8000'
 
   axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
   axios.defaults.xsrfCookieName = 'csrftoken';
-
+  
     const login = (event) => {
         event.preventDefault()
 
-        axios.post('/api/login/', user)
+        axios.post(`${rootUrl}/api/login/`, user)
         .then(response =>  {
            const data = response.data
            setIsAuth(true)
