@@ -94,7 +94,7 @@ const Specialist = () => {
                     Вернуться назад
                 </MyButton>
                 <img src={`data:image/jpeg;base64,${overall}`} alt=''/>
-                { !isLoading2 &&  <img src='https://psytests.org/img/profile-eye-sd.png' alt=''/> }
+                { !isLoading2 &&  <img src={`${rootUrl}/static/images/circle.png`} alt=''/> }
             </div>   
         </div>
         }
